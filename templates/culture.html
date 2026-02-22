@@ -1,0 +1,421 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="culture-hero">
+    <div class="culture-hero-content">
+        <h1 class="culture-hero-title">看文物</h1>
+        <p class="culture-hero-subtitle">探索中国传统榫卯工艺的精妙之处</p>
+    </div>
+</section>
+
+<!-- 文物展示 -->
+<section class="section">
+    <div class="culture-showcase">
+        <div class="culture-item" data-aos="fade-up">
+            <div class="culture-image-container">
+                <img src="{{ url_for('static', filename='images/feiyunlou.jpg') }}" 
+                     onerror="this.src='{{ url_for('static', filename='images/placeholder.svg') }}'" 
+                     alt="飞云楼">
+                <div class="culture-overlay">
+                    <span class="culture-badge">国家级文物</span>
+                </div>
+            </div>
+            <div class="culture-content">
+                <h3 class="culture-title">飞云楼</h3>
+                <div class="culture-meta">
+                    <span class="meta-item">📍 山西万荣</span>
+                    <span class="meta-item">🏛️ 明代建筑</span>
+                </div>
+                <p class="culture-description">位于山西万荣县东岳庙内，建于明正德十年（1515年），纯木结构，无一钉一铆。楼高23.19米，三层四檐，采用斗拱、榫卯等传统工艺，被誉为"中华第一木楼"。</p>
+                <div class="culture-highlights">
+                    <div class="highlight-item">
+                        <span class="highlight-icon">🔨</span>
+                        <span>纯榫卯结构</span>
+                    </div>
+                    <div class="highlight-item">
+                        <span class="highlight-icon">📏</span>
+                        <span>高23.19米</span>
+                    </div>
+                    <div class="highlight-item">
+                        <span class="highlight-icon">🎨</span>
+                        <span>三层四檐</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="culture-item reverse" data-aos="fade-up" data-aos-delay="100">
+            <div class="culture-image-container">
+                <img src="{{ url_for('static', filename='images/yingxianmuta.jpg') }}" 
+                     onerror="this.src='{{ url_for('static', filename='images/placeholder.svg') }}'" 
+                     alt="应县木塔">
+                <div class="culture-overlay">
+                    <span class="culture-badge gold">世界文化遗产</span>
+                </div>
+            </div>
+            <div class="culture-content">
+                <h3 class="culture-title">应县木塔</h3>
+                <div class="culture-meta">
+                    <span class="meta-item">📍 山西应县</span>
+                    <span class="meta-item">🏛️ 辽代建筑</span>
+                </div>
+                <p class="culture-description">建于辽清宁二年（1056年），全称佛宫寺释迦塔，高67.31米，是世界现存最古老最高大的纯木结构塔式建筑。全塔无一钉一铆，全靠榫卯结构支撑，历经千年地震而不倒。</p>
+                <div class="culture-highlights">
+                    <div class="highlight-item">
+                        <span class="highlight-icon">⏳</span>
+                        <span>近千年历史</span>
+                    </div>
+                    <div class="highlight-item">
+                        <span class="highlight-icon">📏</span>
+                        <span>高67.31米</span>
+                    </div>
+                    <div class="highlight-item">
+                        <span class="highlight-icon">🌍</span>
+                        <span>世界最高木塔</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="culture-item" data-aos="fade-up" data-aos-delay="200">
+            <div class="culture-image-container">
+                <img src="{{ url_for('static', filename='images/qiufenglou.jpg') }}" 
+                     onerror="this.src='{{ url_for('static', filename='images/placeholder.svg') }}'" 
+                     alt="秋风楼">
+                <div class="culture-overlay">
+                    <span class="culture-badge">省级文物</span>
+                </div>
+            </div>
+            <div class="culture-content">
+                <h3 class="culture-title">秋风楼</h3>
+                <div class="culture-meta">
+                    <span class="meta-item">📍 山西万荣</span>
+                    <span class="meta-item">🏛️ 清代建筑</span>
+                </div>
+                <p class="culture-description">位于万荣县后土祠内，因汉武帝《秋风辞》而得名。楼高三层，采用传统榫卯工艺，结构精巧，飞檐翘角，是研究中国古代木构建筑的重要实物资料。</p>
+                <div class="culture-highlights">
+                    <div class="highlight-item">
+                        <span class="highlight-icon">📜</span>
+                        <span>秋风辞典故</span>
+                    </div>
+                    <div class="highlight-item">
+                        <span class="highlight-icon">🎭</span>
+                        <span>飞檐翘角</span>
+                    </div>
+                    <div class="highlight-item">
+                        <span class="highlight-icon">🔍</span>
+                        <span>结构精巧</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="culture-item reverse" data-aos="fade-up" data-aos-delay="300">
+            <div class="culture-image-container">
+                <img src="{{ url_for('static', filename='images/hukoupu.jpg') }}" 
+                     onerror="this.src='{{ url_for('static', filename='images/placeholder.svg') }}'" 
+                     alt="壶口瀑布">
+                <div class="culture-overlay">
+                    <span class="culture-badge nature">自然景观</span>
+                </div>
+            </div>
+            <div class="culture-content">
+                <h3 class="culture-title">壶口瀑布</h3>
+                <div class="culture-meta">
+                    <span class="meta-item">📍 晋陕交界</span>
+                    <span class="meta-item">🌊 黄河奇观</span>
+                </div>
+                <p class="culture-description">位于晋陕峡谷中段，是黄河上最大的瀑布，也是中国第二大瀑布。瀑布宽达50米，落差约30米，水势磅礴，声震数里，"黄河之水天上来"的壮观景象在此得到完美诠释。</p>
+                <div class="culture-highlights">
+                    <div class="highlight-item">
+                        <span class="highlight-icon">💧</span>
+                        <span>宽50米</span>
+                    </div>
+                    <div class="highlight-item">
+                        <span class="highlight-icon">⬇️</span>
+                        <span>落差30米</span>
+                    </div>
+                    <div class="highlight-item">
+                        <span class="highlight-icon">🎵</span>
+                        <span>声震数里</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 榫卯知识 -->
+<section class="section knowledge-section">
+    <h2 class="section-title">榫卯知识</h2>
+    <div class="knowledge-grid">
+        <a href="{{ url_for('viewer3d') }}" class="knowledge-card featured" style="text-decoration: none;">
+            <div class="knowledge-icon">🔍</div>
+            <h3>3D交互查看器</h3>
+            <p>360度旋转查看5种经典榫卯结构，支持爆炸视图展示内部构造，直观了解榫卯工艺的精妙之处。</p>
+            <span class="knowledge-link">立即体验 →</span>
+        </a>
+        
+        <div class="knowledge-card">
+            <div class="knowledge-icon">❓</div>
+            <h3>什么是榫卯？</h3>
+            <p>榫卯是中国古代建筑、家具及其他器械的主要结构方式。榫（sǔn）是凸出部分，卯（mǎo）是凹进部分，两者相互咬合，不用一钉一铆便能牢固连接。</p>
+        </div>
+        
+        <div class="knowledge-card">
+            <div class="knowledge-icon">📚</div>
+            <h3>榫卯的历史</h3>
+            <p>榫卯技术可追溯至7000年前的河姆渡文化时期，在浙江余姚河姆渡遗址中发现了大量榫卯结构的木构件。经过数千年的发展，榫卯工艺日臻完善。</p>
+        </div>
+        
+        <div class="knowledge-card">
+            <div class="knowledge-icon">🔧</div>
+            <h3>榫卯的种类</h3>
+            <p>传统榫卯结构多达上百种，常见的包括：燕尾榫（抗拉力最强）、直榫（最基本结构）、透榫（穿透式连接）、半搭接（十字交叉）、指接（板材拼接）等。</p>
+        </div>
+        
+        <div class="knowledge-card">
+            <div class="knowledge-icon">✨</div>
+            <h3>榫卯的优势</h3>
+            <p>不用钉子，避免金属锈蚀；结构牢固，抗震性能优异；便于拆装维修；美观大方，体现工艺之美；环保健康，符合现代绿色建筑理念。</p>
+        </div>
+        
+        <div class="knowledge-card">
+            <div class="knowledge-icon">🌟</div>
+            <h3>现代应用</h3>
+            <p>榫卯工艺不仅应用于传统建筑和家具，在现代设计中也焕发新生。从文创产品、益智玩具到现代家具设计，榫卯元素被广泛运用。</p>
+        </div>
+    </div>
+</section>
+
+<style>
+/* 文化页面英雄区 */
+.culture-hero {
+    background: linear-gradient(135deg, #d4a574 0%, #b8a07e 100%);
+    padding: 80px 20px 60px;
+    text-align: center;
+    color: white;
+}
+
+.culture-hero-title {
+    font-size: 3rem;
+    font-weight: 900;
+    margin-bottom: 15px;
+    letter-spacing: 0.1em;
+}
+
+.culture-hero-subtitle {
+    font-size: 1.1rem;
+    opacity: 0.95;
+}
+
+/* 文物展示 */
+.culture-showcase {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+
+.culture-item {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    margin-bottom: 80px;
+    align-items: center;
+}
+
+.culture-item.reverse {
+    direction: rtl;
+}
+
+.culture-item.reverse > * {
+    direction: ltr;
+}
+
+.culture-image-container {
+    position: relative;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s;
+}
+
+.culture-image-container:hover {
+    transform: scale(1.02);
+}
+
+.culture-image-container img {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+}
+
+.culture-overlay {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+.culture-badge {
+    background: rgba(184, 160, 126, 0.95);
+    color: white;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    backdrop-filter: blur(10px);
+}
+
+.culture-badge.gold {
+    background: linear-gradient(135deg, #d4af37 0%, #c19a6b 100%);
+}
+
+.culture-badge.nature {
+    background: linear-gradient(135deg, #4a90e2 0%, #357abd 100%);
+}
+
+.culture-content {
+    padding: 20px;
+}
+
+.culture-title {
+    font-size: 2rem;
+    color: var(--text-dark);
+    margin-bottom: 15px;
+    font-weight: 700;
+}
+
+.culture-meta {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.meta-item {
+    font-size: 0.9rem;
+    color: var(--text-mid);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.culture-description {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: var(--text-mid);
+    margin-bottom: 25px;
+}
+
+.culture-highlights {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.highlight-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px;
+    background: var(--bg-warm);
+    border-radius: 25px;
+    font-size: 0.9rem;
+    color: var(--text-dark);
+}
+
+.highlight-icon {
+    font-size: 1.2rem;
+}
+
+/* 知识区域 */
+.knowledge-section {
+    background: var(--bg-warm);
+    padding: 60px 20px;
+}
+
+.knowledge-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.knowledge-card {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
+.knowledge-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.knowledge-card.featured {
+    background: linear-gradient(135deg, #d4a574 0%, #b8a07e 100%);
+    color: white;
+}
+
+.knowledge-icon {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+}
+
+.knowledge-card h3 {
+    font-size: 1.3rem;
+    margin-bottom: 12px;
+    font-weight: 600;
+}
+
+.knowledge-card p {
+    line-height: 1.7;
+    opacity: 0.9;
+    font-size: 0.95rem;
+}
+
+.knowledge-card.featured p {
+    opacity: 0.95;
+}
+
+.knowledge-link {
+    display: inline-block;
+    margin-top: 15px;
+    font-weight: 600;
+    opacity: 1;
+}
+
+/* 响应式 */
+@media (max-width: 768px) {
+    .culture-hero-title {
+        font-size: 2rem;
+    }
+    
+    .culture-item {
+        grid-template-columns: 1fr;
+        gap: 25px;
+        margin-bottom: 50px;
+    }
+    
+    .culture-item.reverse {
+        direction: ltr;
+    }
+    
+    .culture-image-container img {
+        height: 250px;
+    }
+    
+    .culture-title {
+        font-size: 1.5rem;
+    }
+    
+    .knowledge-grid {
+        grid-template-columns: 1fr;
+    }
+}
+</style>
+{% endblock %}

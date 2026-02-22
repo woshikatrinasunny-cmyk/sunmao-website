@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D查看器测试</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: Arial, sans-serif; background: #f5f5f5; }
+        #canvas3d { 
+            width: 100vw; 
+            height: 100vh; 
+            background: linear-gradient(135deg, #f5f0e8 0%, #ede6d8 100%);
+        }
+        .controls {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            display: flex;
+            gap: 10px;
+            z-index: 100;
+        }
+        button {
+            padding: 10px 20px;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover { background: #f0f0f0; }
+        button.active { background: #4CAF50; color: white; }
+    </style>
+</head>
+<body>
+    <div id="canvas3d"></div>
+    <div class="controls">
+        <button id="resetBtn">重置</button>
+        <button id="explodeBtn">爆炸</button>
+        <button id="animateBtn">旋转</button>
+        <select id="structureSelect">
+            <option value="mortise-tenon">直榫</option>
+            <option value="dovetail">燕尾榫</option>
+            <option value="through-tenon">透榫</option>
+            <option value="half-lap">半搭接</option>
+            <option value="finger-joint">指接</option>
+        </select>
+    </div>
+
+    <script type="importmap">
+    {
+        "imports": {
+            "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+            "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+        }
+    }
+    </script>
+    
+    <script type="module">
+        console.log('Script starting...');
+        
+        import * as THREE from 'three';
+        import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+        
+        console.log('THREE loaded:', THREE);
+        
+        class Viewer3D {
+            constructor() {
+                console.log('Viewer3D constructor called');
+                this.container = document.getElementById('canvas3d');
+                this.structureParts = [];
+                this.isExploded = false;
+                this.isAnimating = false;
+                
+                this.init();
+                this.setupControls();
+                this.createMortiseTenon();
+                this.animate();
+            }
+            
+            init() {
+                console.log('Initializing scene...');
+                
+                // 场景
+                this.scene = new THREE.Scene();
+                this.scene.background = new THREE.Color(0xf5f0e8);
+                
+                // 相机
+                this.camera = new THREE.PerspectiveCamera(
+                    45,
+                    window.innerWidth / window.innerHeight,
+                    0.1,
+                    1000
+                );
+                this.camera.position.set(5, 5, 5);
+                
+                // 渲染器
+                this.renderer = new THREE.WebGLRenderer({ antialias: true });
+                this.renderer.setSize(window.innerWidth, window.innerHeight);
+                this.renderer.setPixelRatio(window.devicePixelRatio);
+                this.container.appendChild(this.renderer.domElement);
+                
+                // 控制器
+                this.controls = new OrbitControls(this.camera, this.renderer.domElement);
+                this.controls.enableDamping = true;
+                
+                // 光源
+                const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
+                this.scene.add(ambientLight);
+                
+                const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
+                directionalLight.position.set(5, 10, 5);
+                this.scene.add(directionalLight);
+                
+                // 网格
+                const gridHelper = new THREE.GridHelper(10, 10);
+                this.scene.add(gridHelper);
+                
+                console.log('Scene initialized');
+            }
+            
+            setupControls() {
+                document.getElementById('resetBtn').onclick = () => this.resetView();
+                document.getElementById('explodeBtn').onclick = () => this.toggleExplode();
+                document.getElementById('animateBtn').onclick = () => this.toggleAnimation();
+                document.getElementById('structureSelect').onchange = (e) => {
+                    this.clearStructure();
+                    const type = e.target.value;
+                    switch(type) {
+                        case 'mortise-tenon': this.createMortiseTenon(); break;
+                        case 'dovetail': this.createDovetail(); break;
+                        case 'through-tenon': this.createThroughTenon(); break;
+                        case 'half-lap': this.createHalfLap(); break;
+                        case 'finger-joint': this.createFingerJoint(); break;
+                    }
+                };
+            }
+            
+            createMortiseTenon() {
+                const material = new THREE.MeshStandardMaterial({ color: 0xd4a574 });
+                
+                // 榫头
+                const tenon = new THREE.Mesh(new THREE.BoxGeometry(0.8, 2, 0.8), material);
+                tenon.position.set(-1.2, 0, 0);
+                this.scene.add(tenon);
+                this.structureParts.push({ mesh: tenon, originalPos: tenon.position.clone() });
+                
+                const tenonHead = new THREE.Mesh(new THREE.BoxGeometry(0.4, 0.6, 0.4), material);
+                tenonHead.position.set(-0.4, 0, 0);
+                this.scene.add(tenonHead);
+                this.structureParts.push({ mesh: tenonHead, originalPos: tenonHead.position.clone() });
+                
+                // 卯眼
+                const mortise = new THREE.Mesh(new THREE.BoxGeometry(0.8, 2, 0.8), material);
+                mortise.position.set(1.2, 0, 0);
+                this.scene.add(mortise);
+                this.structureParts.push({ mesh: mortise, originalPos: mortise.position.clone() });
+                
+                console.log('Mortise-tenon created');
+            }
+            
+            createDovetail() {
+                const material = new THREE.MeshStandardMaterial({ color: 0xc19a6b });
+                
+                const box1 = new THREE.Mesh(new THREE.BoxGeometry(1, 1, 1), material);
+                box1.position.set(-1.5, 0, 0);
+                this.scene.add(box1);
+                this.structureParts.push({ mesh: box1, originalPos: box1.position.clone() });
+                
+                const box2 = new THREE.Mesh(new THREE.BoxGeometry(1, 1, 1), material);
+                box2.position.set(1.5, 0, 0);
+                this.scene.add(box2);
+                this.structureParts.push({ mesh: box2, originalPos: box2.position.clone() });
+            }
+            
+            createThroughTenon() {
+                const material = new THREE.MeshStandardMaterial({ color: 0xb8956a });
+                
+                const post = new THREE.Mesh(new THREE.BoxGeometry(0.6, 3, 0.6), material);
+                this.scene.add(post);
+                this.structureParts.push({ mesh: post, originalPos: post.position.clone() });
+                
+                const beam = new THREE.Mesh(new THREE.BoxGeometry(3, 0.6, 0.6), material);
+                beam.position.y = 0.5;
+                this.scene.add(beam);
+                this.structureParts.push({ mesh: beam, originalPos: beam.position.clone() });
+            }
+            
+            createHalfLap() {
+                const material = new THREE.MeshStandardMaterial({ color: 0xdaa520 });
+                
+                const piece1 = new THREE.Mesh(new THREE.BoxGeometry(2, 0.6, 0.6), material);
+                this.scene.add(piece1);
+                this.structureParts.push({ mesh: piece1, originalPos: piece1.position.clone() });
+                
+                const piece2 = new THREE.Mesh(new THREE.BoxGeometry(0.6, 0.6, 2), material);
+                this.scene.add(piece2);
+                this.structureParts.push({ mesh: piece2, originalPos: piece2.position.clone() });
+            }
+            
+            createFingerJoint() {
+                const material = new THREE.MeshStandardMaterial({ color: 0xcd853f });
+                
+                for (let i = 0; i < 5; i++) {
+                    if (i % 2 === 0) {
+                        const finger = new THREE.Mesh(new THREE.BoxGeometry(0.3, 0.6, 0.8), material);
+                        finger.position.set(-1.2, i * 0.6 - 1.2, 0);
+                        this.scene.add(finger);
+                        this.structureParts.push({ mesh: finger, originalPos: finger.position.clone() });
+                    } else {
+                        const finger = new THREE.Mesh(new THREE.BoxGeometry(0.3, 0.6, 0.8), material);
+                        finger.position.set(1.2, i * 0.6 - 1.2, 0);
+                        this.scene.add(finger);
+                        this.structureParts.push({ mesh: finger, originalPos: finger.position.clone() });
+                    }
+                }
+            }
+            
+            clearStructure() {
+                this.structureParts.forEach(part => this.scene.remove(part.mesh));
+                this.structureParts = [];
+            }
+            
+            toggleExplode() {
+                this.isExploded = !this.isExploded;
+                const btn = document.getElementById('explodeBtn');
+                btn.classList.toggle('active');
+                
+                this.structureParts.forEach(part => {
+                    if (this.isExploded) {
+                        const dir = part.originalPos.clone().normalize();
+                        part.mesh.position.copy(part.originalPos).add(dir.multiplyScalar(1.5));
+                    } else {
+                        part.mesh.position.copy(part.originalPos);
+                    }
+                });
+            }
+            
+            toggleAnimation() {
+                this.isAnimating = !this.isAnimating;
+                const btn = document.getElementById('animateBtn');
+                btn.classList.toggle('active');
+                this.controls.autoRotate = this.isAnimating;
+                this.controls.autoRotateSpeed = 2.0;
+            }
+            
+            resetView() {
+                this.camera.position.set(5, 5, 5);
+                this.controls.reset();
+                if (this.isExploded) this.toggleExplode();
+                if (this.isAnimating) this.toggleAnimation();
+            }
+            
+            animate() {
+                requestAnimationFrame(() => this.animate());
+                this.controls.update();
+                this.renderer.render(this.scene, this.camera);
+            }
+        }
+        
+        // 启动
+        new Viewer3D();
+        console.log('Viewer3D instance created');
+    </script>
+</body>
+</html>

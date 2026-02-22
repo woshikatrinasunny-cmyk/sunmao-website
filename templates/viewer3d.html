@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>榫卯结构 3D 查看器</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- 竖向侧边导航 -->
+    <nav class="side-nav">
+        <div class="nav-logo">
+            <span class="logo-text">榫<br>卯</span>
+        </div>
+        <div class="nav-links">
+            <a href="{{ url_for('index') }}" class="nav-item">
+                <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <circle cx="12" cy="12" r="3"/><path d="M12 2a10 10 0 0 1 10 10 10 10 0 0 1-10 10A10 10 0 0 1 2 12 10 10 0 0 1 12 2z"/><path d="M2 12h4m12 0h4M12 2v4m0 12v4"/>
+                </svg>
+                <span>推荐</span>
+            </a>
+            <a href="{{ url_for('viewer3d') }}" class="nav-item active">
+                <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/>
+                </svg>
+                <span>3D查看</span>
+            </a>
+            <a href="{{ url_for('routes') }}" class="nav-item">
+                <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path d="M3 21h18M5 21V7l7-4 7 4v14M9 21v-6h6v6M9 9h.01M15 9h.01M9 13h.01M15 13h.01"/>
+                </svg>
+                <span>游景点</span>
+            </a>
+            <a href="{{ url_for('culture') }}" class="nav-item">
+                <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path d="M12 2C8 2 8 6 8 8c0 2 0 4 4 6 4-2 4-4 4-6 0-2 0-6-4-6z"/><path d="M8 14c-3 1-5 3-5 5v3h18v-3c0-2-2-4-5-5"/><circle cx="12" cy="17" r="2"/>
+                </svg>
+                <span>看文物</span>
+            </a>
+            <a href="{{ url_for('shop') }}" class="nav-item">
+                <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/>
+                </svg>
+                <span>文创</span>
+            </a>
+            <a href="{{ url_for('profile') }}" class="nav-item">
+                <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
+                </svg>
+                <span>我的</span>
+            </a>
+        </div>
+    </nav>
+
+    <main class="main-content">
+<section class="viewer-page">
+    <div class="viewer-header">
+        <h2>榫卯结构 3D 查看器</h2>
+        <p>360度旋转查看，深入了解榫卯工艺</p>
+    </div>
+
+    <div class="viewer-container">
+        <div id="canvas3d"></div>
+        
+        <div class="viewer-controls">
+            <button id="resetBtn" class="control-btn">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/>
+                    <path d="M21 3v5h-5"/>
+                </svg>
+                重置视角
+            </button>
+            <button id="explodeBtn" class="control-btn">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 2v4m0 12v4M4.93 4.93l2.83 2.83m8.48 8.48l2.83 2.83M2 12h4m12 0h4M4.93 19.07l2.83-2.83m8.48-8.48l2.83-2.83"/>
+                </svg>
+                爆炸视图
+            </button>
+            <button id="animateBtn" class="control-btn">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                    <polygon points="5 3 19 12 5 21 5 3"/>
+                </svg>
+                自动旋转
+            </button>
+            <button id="fullscreenBtn" class="control-btn">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/>
+                </svg>
+                全屏查看
+            </button>
+        </div>
+
+        <div class="viewer-info">
+            <div class="info-item">
+                <span class="info-label">结构类型：</span>
+                <select id="structureSelect" class="structure-select">
+                    <option value="mortise-tenon">直榫</option>
+                    <option value="dovetail">燕尾榫</option>
+                    <option value="through-tenon">透榫</option>
+                    <option value="half-lap">半搭接</option>
+                    <option value="finger-joint">指接</option>
+                </select>
+            </div>
+            <div class="info-item">
+                <span class="info-label">操作提示：</span>
+                <span class="info-text">鼠标拖动旋转 | 滚轮缩放 | 右键平移</span>
+            </div>
+            <div class="info-item" style="width: 100%; margin-top: 10px;">
+                <span class="info-label">VR/AR说明：</span>
+                <span class="info-text" style="color: #f57c00;">需要HTTPS和支持的设备。<a href="#" onclick="alert('请查看项目根目录的 VR_AR使用指南.txt 文件，了解详细的配置和使用方法。\n\n快速方案：使用 ngrok 创建HTTPS隧道即可在真实设备上测试。'); return false;" style="color: #2196F3; text-decoration: underline; margin-left: 5px;">查看使用指南</a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="structure-description">
+        <h3 id="structureName">直榫结构</h3>
+        <p id="structureDesc">直榫是最基本的榫卯结构，由凸出的榫头和凹进的卯眼组成，通过精确的尺寸配合实现牢固连接。</p>
+        <div class="structure-features">
+            <div class="feature-item">
+                <strong>特点：</strong>结构简单，制作方便
+            </div>
+            <div class="feature-item">
+                <strong>应用：</strong>家具框架、建筑梁柱连接
+            </div>
+            <div class="feature-item">
+                <strong>强度：</strong>★★★☆☆
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+.viewer-page {
+    padding: 20px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.viewer-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.viewer-header h2 {
+    font-size: 2rem;
+    color: var(--text-dark);
+    margin-bottom: 10px;
+}
+
+.viewer-header p {
+    color: var(--text-mid);
+    font-size: 1rem;
+}
+
+.viewer-container {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+}
+
+#canvas3d {
+    width: 100%;
+    height: 600px;
+    border-radius: 8px;
+    background: linear-gradient(135deg, #f5f0e8 0%, #ede6d8 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.viewer-controls {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.control-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 20px;
+    background: var(--bg-warm);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--text-dark);
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.control-btn:hover {
+    background: var(--accent);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.control-btn.active {
+    background: var(--accent-dark);
+    color: white;
+    border-color: var(--accent-dark);
+}
+
+.viewer-info {
+    display: flex;
+    gap: 20px;
+    margin-top: 20px;
+    padding: 15px;
+    background: var(--bg-cream);
+    border-radius: 8px;
+    flex-wrap: wrap;
+}
+
+.info-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.info-label {
+    font-weight: 600;
+    color: var(--text-dark);
+}
+
+.info-text {
+    color: var(--text-mid);
+    font-size: 0.9rem;
+}
+
+.structure-select {
+    padding: 8px 12px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    background: white;
+    color: var(--text-dark);
+    font-size: 0.9rem;
+    cursor: pointer;
+}
+
+.structure-description {
+    background: white;
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.structure-description h3 {
+    font-size: 1.5rem;
+    color: var(--text-dark);
+    margin-bottom: 15px;
+}
+
+.structure-description p {
+    color: var(--text-mid);
+    line-height: 1.8;
+    margin-bottom: 20px;
+}
+
+.structure-features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 15px;
+}
+
+.feature-item {
+    padding: 15px;
+    background: var(--bg-cream);
+    border-radius: 8px;
+    border-left: 3px solid var(--accent);
+}
+
+.feature-item strong {
+    color: var(--accent-dark);
+    margin-right: 8px;
+}
+
+@media (max-width: 768px) {
+    #canvas3d {
+        height: 400px;
+    }
+    
+    .viewer-controls {
+        flex-direction: column;
+    }
+    
+    .control-btn {
+        width: 100%;
+        justify-content: center;
+    }
+}
+</style>
+
+<script type="importmap">
+{
+    "imports": {
+        "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+        "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+    }
+}
+</script>
+<script type="module">
+console.log('Script starting...');
+
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+console.log('THREE loaded:', THREE);
+
+class Viewer3D {
+    constructor() {
+        console.log('Viewer3D constructor');
+        this.container = document.getElementById('canvas3d');
+        if (!this.container) {
+            console.error('Canvas container not found!');
+            return;
+        }
+        
+        this.structureParts = [];
+        this.isExploded = false;
+        this.isAnimating = false;
+        this.currentStructure = null;
+        
+        this.init();
+        this.setupControls();
+        this.loadInitialStructure();
+        this.animate();
+    }
+    
+    init() {
+        console.log('Initializing scene...');
+        
+        this.scene = new THREE.Scene();
+        this.scene.background = new THREE.Color(0xf5f0e8);
+        
+        this.camera = new THREE.PerspectiveCamera(
+            45,
+            this.container.clientWidth / this.container.clientHeight,
+            0.1,
+            1000
+        );
+        this.camera.position.set(5, 5, 5);
+        
+        this.renderer = new THREE.WebGLRenderer({ antialias: true });
+        this.renderer.setSize(this.container.clientWidth, this.container.clientHeight);
+        this.renderer.setPixelRatio(window.devicePixelRatio);
+        this.renderer.shadowMap.enabled = true;
+        this.container.appendChild(this.renderer.domElement);
+        
+        this.controls = new OrbitControls(this.camera, this.renderer.domElement);
+        this.controls.enableDamping = true;
+        this.controls.dampingFactor = 0.05;
+        
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
+        this.scene.add(ambientLight);
+        
+        const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
+        directionalLight.position.set(5, 10, 5);
+        directionalLight.castShadow = true;
+        this.scene.add(directionalLight);
+        
+        const directionalLight2 = new THREE.DirectionalLight(0xffffff, 0.4);
+        directionalLight2.position.set(-5, 5, -5);
+        this.scene.add(directionalLight2);
+        
+        const gridHelper = new THREE.GridHelper(10, 10, 0xcccccc, 0xeeeeee);
+        this.scene.add(gridHelper);
+        
+        window.addEventListener('resize', () => this.onWindowResize());
+        
+        console.log('Scene initialized');
+    }
+    
+    setupControls() {
+        document.getElementById('resetBtn').addEventListener('click', () => this.resetView());
+        document.getElementById('explodeBtn').addEventListener('click', () => this.toggleExplode());
+        document.getElementById('animateBtn').addEventListener('click', () => this.toggleAnimation());
+        document.getElementById('fullscreenBtn').addEventListener('click', () => this.toggleFullscreen());
+        document.getElementById('structureSelect').addEventListener('change', (e) => this.loadStructure(e.target.value));
+    }
+    
+    loadInitialStructure() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const type = urlParams.get('type') || 'mortise-tenon';
+        document.getElementById('structureSelect').value = type;
+        this.loadStructure(type);
+    }
+    
+    loadStructure(type) {
+        this.clearStructure();
+        this.isExploded = false;
+        
+        switch(type) {
+            case 'mortise-tenon':
+                this.createMortiseTenon();
+                this.updateDescription('直榫结构', '直榫是最基本的榫卯结构，由凸出的榫头和凹进的卯眼组成。', '结构简单，制作方便', '家具框架、建筑梁柱', '★★★☆☆');
+                break;
+            case 'dovetail':
+                this.createDovetail();
+                this.updateDescription('燕尾榫', '燕尾榫因形似燕尾而得名，具有极强的抗拉力。', '抗拉力最强', '抽屉、箱体连接', '★★★★★');
+                break;
+            case 'through-tenon':
+                this.createThroughTenon();
+                this.updateDescription('透榫', '榫头完全穿透卯眼，外露可见，结构牢固美观。', '穿透式，牢固可靠', '桌椅腿部连接', '★★★★☆');
+                break;
+            case 'half-lap':
+                this.createHalfLap();
+                this.updateDescription('半搭接', '两个构件各去掉一半厚度，搭接在一起。', '简单实用，易于制作', '框架十字连接', '★★★☆☆');
+                break;
+            case 'finger-joint':
+                this.createFingerJoint();
+                this.updateDescription('指接', '多个指状榫头交错咬合，用于板材拼接。', '接触面积大，强度高', '板材加长拼接', '★★★★☆');
+                break;
+        }
+        
+        this.currentStructure = type;
+    }
+    
+    createMortiseTenon() {
+        // 直榫：榫头厚度为木材的1/3，带肩部
+        const wood1 = new THREE.MeshStandardMaterial({ color: 0xd4a574, roughness: 0.8, metalness: 0.1 });
+        const wood2 = new THREE.MeshStandardMaterial({ color: 0xc19a6b, roughness: 0.8, metalness: 0.1 });
+        
+        // 榫头部件（带肩部）
+        const tenonGroup = new THREE.Group();
+        
+        // 主体部分
+        const tenonBody = new THREE.Mesh(new THREE.BoxGeometry(1.2, 2.4, 0.9), wood1);
+        tenonBody.position.set(0, 0, 0);
+        tenonBody.castShadow = true;
+        tenonGroup.add(tenonBody);
+        
+        // 榫头（厚度为1/3）
+        const tenonHead = new THREE.Mesh(new THREE.BoxGeometry(0.4, 1.2, 0.3), wood1);
+        tenonHead.position.set(0.8, 0, 0);
+        tenonHead.castShadow = true;
+        tenonGroup.add(tenonHead);
+        
+        tenonGroup.position.set(-2, 0, 0);
+        this.scene.add(tenonGroup);
+        this.structureParts.push({ mesh: tenonGroup, originalPos: tenonGroup.position.clone() });
+        
+        // 卯眼部件
+        const mortiseGroup = new THREE.Group();
+        
+        // 主体
+        const mortiseBody = new THREE.Mesh(new THREE.BoxGeometry(1.2, 2.4, 0.9), wood2);
+        mortiseBody.castShadow = true;
+        mortiseGroup.add(mortiseBody);
+        
+        // 卯眼（凹槽）
+        const mortiseHole = new THREE.Mesh(new THREE.BoxGeometry(0.42, 1.22, 0.32), 
+            new THREE.MeshStandardMaterial({ color: 0x8b6f47, roughness: 0.9 }));
+        mortiseHole.position.set(-0.39, 0, 0);
+        mortiseGroup.add(mortiseHole);
+        
+        mortiseGroup.position.set(2, 0, 0);
+        this.scene.add(mortiseGroup);
+        this.structureParts.push({ mesh: mortiseGroup, originalPos: mortiseGroup.position.clone() });
+    }
+    
+    createDovetail() {
+        // 燕尾榫：梯形pins和tails，角度约10-14度
+        const wood1 = new THREE.MeshStandardMaterial({ color: 0xc19a6b, roughness: 0.8, metalness: 0.1 });
+        const wood2 = new THREE.MeshStandardMaterial({ color: 0xb8956a, roughness: 0.8, metalness: 0.1 });
+        
+        const depth = 0.8;
+        const height = 1.5;
+        
+        // 创建tail（燕尾）形状
+        function createTailShape(width, topWidth) {
+            const shape = new THREE.Shape();
+            shape.moveTo(-width/2, 0);
+            shape.lineTo(width/2, 0);
+            shape.lineTo(topWidth/2, height);
+            shape.lineTo(-topWidth/2, height);
+            shape.lineTo(-width/2, 0);
+            return shape;
+        }
+        
+        // 左侧板（带tails）
+        const leftBoard = new THREE.Group();
+        const leftBase = new THREE.Mesh(new THREE.BoxGeometry(0.8, 2, depth), wood1);
+        leftBase.position.set(0, 0, 0);
+        leftBase.castShadow = true;
+        leftBoard.add(leftBase);
+        
+        // 创建3个tails
+        for (let i = 0; i < 3; i++) {
+            const tailShape = createTailShape(0.4, 0.6);
+            const tailGeom = new THREE.ExtrudeGeometry(tailShape, { depth: depth, bevelEnabled: false });
+            const tail = new THREE.Mesh(tailGeom, wood1);
+            tail.position.set(0.4, -0.7 + i * 0.7, -depth/2);
+            tail.rotation.y = Math.PI / 2;
+            tail.castShadow = true;
+            leftBoard.add(tail);
+        }
+        
+        leftBoard.position.set(-1.5, 0, 0);
+        this.scene.add(leftBoard);
+        this.structureParts.push({ mesh: leftBoard, originalPos: leftBoard.position.clone() });
+        
+        // 右侧板（带pins）
+        const rightBoard = new THREE.Group();
+        const rightBase = new THREE.Mesh(new THREE.BoxGeometry(0.8, 2, depth), wood2);
+        rightBase.castShadow = true;
+        rightBoard.add(rightBase);
+        
+        // 创建对应的pins（较窄）
+        for (let i = 0; i < 2; i++) {
+            const pinShape = createTailShape(0.6, 0.4);
+            const pinGeom = new THREE.ExtrudeGeometry(pinShape, { depth: depth, bevelEnabled: false });
+            const pin = new THREE.Mesh(pinGeom, wood2);
+            pin.position.set(-0.4, -0.35 + i * 0.7, -depth/2);
+            pin.rotation.y = -Math.PI / 2;
+            pin.castShadow = true;
+            rightBoard.add(pin);
+        }
+        
+        rightBoard.position.set(1.5, 0, 0);
+        this.scene.add(rightBoard);
+        this.structureParts.push({ mesh: rightBoard, originalPos: rightBoard.position.clone() });
+    }
+    
+    createThroughTenon() {
+        // 透榫：榫头完全穿透，两端可见
+        const wood1 = new THREE.MeshStandardMaterial({ color: 0xb8956a, roughness: 0.8, metalness: 0.1 });
+        const wood2 = new THREE.MeshStandardMaterial({ color: 0xa67c52, roughness: 0.8, metalness: 0.1 });
+        
+        // 立柱（带榫头）
+        const postGroup = new THREE.Group();
+        const post = new THREE.Mesh(new THREE.BoxGeometry(0.8, 3.5, 0.8), wood1);
+        post.castShadow = true;
+        postGroup.add(post);
+        
+        // 穿透的榫头（两端露出）
+        const tenon = new THREE.Mesh(new THREE.BoxGeometry(0.35, 0.35, 2.2), wood1);
+        tenon.position.set(0, 0.8, 0);
+        tenon.castShadow = true;
+        postGroup.add(tenon);
+        
+        postGroup.position.set(0, 0, 0);
+        this.scene.add(postGroup);
+        this.structureParts.push({ mesh: postGroup, originalPos: postGroup.position.clone() });
+        
+        // 横梁（带卯眼，榫头穿透）
+        const beamGroup = new THREE.Group();
+        
+        // 横梁左段
+        const beamLeft = new THREE.Mesh(new THREE.BoxGeometry(1.2, 0.8, 0.8), wood2);
+        beamLeft.position.set(-1.5, 0.8, 0);
+        beamLeft.castShadow = true;
+        beamGroup.add(beamLeft);
+        
+        // 横梁右段
+        const beamRight = new THREE.Mesh(new THREE.BoxGeometry(1.2, 0.8, 0.8), wood2);
+        beamRight.position.set(1.5, 0.8, 0);
+        beamRight.castShadow = true;
+        beamGroup.add(beamRight);
+        
+        // 卯眼部分（显示榫头穿透）
+        const mortiseTop = new THREE.Mesh(new THREE.BoxGeometry(0.8, 0.225, 0.8), wood2);
+        mortiseTop.position.set(0, 1.0875, 0);
+        mortiseTop.castShadow = true;
+        beamGroup.add(mortiseTop);
+        
+        const mortiseBottom = new THREE.Mesh(new THREE.BoxGeometry(0.8, 0.225, 0.8), wood2);
+        mortiseBottom.position.set(0, 0.5125, 0);
+        mortiseBottom.castShadow = true;
+        beamGroup.add(mortiseBottom);
+        
+        this.scene.add(beamGroup);
+        this.structureParts.push({ mesh: beamGroup, originalPos: beamGroup.position.clone() });
+    }
+    
+    createHalfLap() {
+        // 半搭接：两块木材各去掉一半厚度，十字交叉
+        const wood1 = new THREE.MeshStandardMaterial({ color: 0xdaa520, roughness: 0.8, metalness: 0.1 });
+        const wood2 = new THREE.MeshStandardMaterial({ color: 0xcd853f, roughness: 0.8, metalness: 0.1 });
+        
+        const thickness = 0.6;
+        const halfThick = thickness / 2;
+        const width = 0.8;
+        
+        // 横向木条（上半部分被切掉中间）
+        const horizontal = new THREE.Group();
+        
+        // 左段（完整厚度）
+        const hLeft = new THREE.Mesh(new THREE.BoxGeometry(1, thickness, width), wood1);
+        hLeft.position.set(-1.5, 0, 0);
+        hLeft.castShadow = true;
+        horizontal.add(hLeft);
+        
+        // 中段（一半厚度）
+        const hMid = new THREE.Mesh(new THREE.BoxGeometry(1, halfThick, width), wood1);
+        hMid.position.set(0, halfThick/2, 0);
+        hMid.castShadow = true;
+        horizontal.add(hMid);
+        
+        // 右段（完整厚度）
+        const hRight = new THREE.Mesh(new THREE.BoxGeometry(1, thickness, width), wood1);
+        hRight.position.set(1.5, 0, 0);
+        hRight.castShadow = true;
+        horizontal.add(hRight);
+        
+        this.scene.add(horizontal);
+        this.structureParts.push({ mesh: horizontal, originalPos: horizontal.position.clone() });
+        
+        // 纵向木条（下半部分被切掉中间）
+        const vertical = new THREE.Group();
+        
+        // 前段（完整厚度）
+        const vFront = new THREE.Mesh(new THREE.BoxGeometry(width, thickness, 1), wood2);
+        vFront.position.set(0, 0, -1.5);
+        vFront.castShadow = true;
+        vertical.add(vFront);
+        
+        // 中段（一半厚度）
+        const vMid = new THREE.Mesh(new THREE.BoxGeometry(width, halfThick, 1), wood2);
+        vMid.position.set(0, -halfThick/2, 0);
+        vMid.castShadow = true;
+        vertical.add(vMid);
+        
+        // 后段（完整厚度）
+        const vBack = new THREE.Mesh(new THREE.BoxGeometry(width, thickness, 1), wood2);
+        vBack.position.set(0, 0, 1.5);
+        vBack.castShadow = true;
+        vertical.add(vBack);
+        
+        this.scene.add(vertical);
+        this.structureParts.push({ mesh: vertical, originalPos: vertical.position.clone() });
+    }
+    
+    createFingerJoint() {
+        // 指接：梳齿状交错结构，用于板材拼接
+        const wood1 = new THREE.MeshStandardMaterial({ color: 0xcd853f, roughness: 0.8, metalness: 0.1 });
+        const wood2 = new THREE.MeshStandardMaterial({ color: 0xdaa520, roughness: 0.8, metalness: 0.1 });
+        
+        const fingerWidth = 0.4;
+        const fingerLength = 0.6;
+        const boardThickness = 0.8;
+        const boardHeight = 2.4;
+        const numFingers = 6;
+        
+        // 左侧板
+        const leftBoard = new THREE.Group();
+        
+        // 基座
+        const leftBase = new THREE.Mesh(
+            new THREE.BoxGeometry(1.2, boardHeight, boardThickness), 
+            wood1
+        );
+        leftBase.position.set(-0.6, 0, 0);
+        leftBase.castShadow = true;
+        leftBoard.add(leftBase);
+        
+        // 创建手指（奇数位置）
+        for (let i = 0; i < numFingers; i++) {
+            if (i % 2 === 0) {
+                const finger = new THREE.Mesh(
+                    new THREE.BoxGeometry(fingerLength, fingerWidth, boardThickness),
+                    wood1
+                );
+                const yPos = -boardHeight/2 + fingerWidth/2 + i * fingerWidth;
+                finger.position.set(0.3, yPos, 0);
+                finger.castShadow = true;
+                leftBoard.add(finger);
+            }
+        }
+        
+        leftBoard.position.set(-1, 0, 0);
+        this.scene.add(leftBoard);
+        this.structureParts.push({ mesh: leftBoard, originalPos: leftBoard.position.clone() });
+        
+        // 右侧板
+        const rightBoard = new THREE.Group();
+        
+        // 基座
+        const rightBase = new THREE.Mesh(
+            new THREE.BoxGeometry(1.2, boardHeight, boardThickness),
+            wood2
+        );
+        rightBase.position.set(0.6, 0, 0);
+        rightBase.castShadow = true;
+        rightBoard.add(rightBase);
+        
+        // 创建手指（偶数位置）
+        for (let i = 0; i < numFingers; i++) {
+            if (i % 2 === 1) {
+                const finger = new THREE.Mesh(
+                    new THREE.BoxGeometry(fingerLength, fingerWidth, boardThickness),
+                    wood2
+                );
+                const yPos = -boardHeight/2 + fingerWidth/2 + i * fingerWidth;
+                finger.position.set(-0.3, yPos, 0);
+                finger.castShadow = true;
+                rightBoard.add(finger);
+            }
+        }
+        
+        rightBoard.position.set(1, 0, 0);
+        this.scene.add(rightBoard);
+        this.structureParts.push({ mesh: rightBoard, originalPos: rightBoard.position.clone() });
+    }
+    
+    clearStructure() {
+        this.structureParts.forEach(part => this.scene.remove(part.mesh));
+        this.structureParts = [];
+    }
+    
+    toggleExplode() {
+        this.isExploded = !this.isExploded;
+        const btn = document.getElementById('explodeBtn');
+        
+        if (this.isExploded) {
+            btn.classList.add('active');
+            this.explodeStructure();
+        } else {
+            btn.classList.remove('active');
+            this.assembleStructure();
+        }
+    }
+    
+    explodeStructure() {
+        this.structureParts.forEach((part, index) => {
+            const direction = new THREE.Vector3(
+                part.originalPos.x,
+                part.originalPos.y,
+                part.originalPos.z
+            ).normalize();
+            
+            const distance = 1.5;
+            const targetPos = part.originalPos.clone().add(direction.multiplyScalar(distance));
+            
+            this.animatePosition(part.mesh, targetPos, 1000);
+        });
+    }
+    
+    assembleStructure() {
+        this.structureParts.forEach(part => {
+            this.animatePosition(part.mesh, part.originalPos, 1000);
+        });
+    }
+    
+    animatePosition(mesh, targetPos, duration) {
+        const startPos = mesh.position.clone();
+        const startTime = Date.now();
+        
+        const animate = () => {
+            const elapsed = Date.now() - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+            const eased = this.easeInOutCubic(progress);
+            
+            mesh.position.lerpVectors(startPos, targetPos, eased);
+            
+            if (progress < 1) {
+                requestAnimationFrame(animate);
+            }
+        };
+        
+        animate();
+    }
+    
+    easeInOutCubic(t) {
+        return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+    }
+    
+    toggleAnimation() {
+        this.isAnimating = !this.isAnimating;
+        const btn = document.getElementById('animateBtn');
+        
+        if (this.isAnimating) {
+            btn.classList.add('active');
+            this.controls.autoRotate = true;
+            this.controls.autoRotateSpeed = 2.0;
+        } else {
+            btn.classList.remove('active');
+            this.controls.autoRotate = false;
+        }
+    }
+    
+    resetView() {
+        this.camera.position.set(5, 5, 5);
+        this.camera.lookAt(0, 0, 0);
+        this.controls.reset();
+        
+        if (this.isExploded) {
+            this.toggleExplode();
+        }
+        if (this.isAnimating) {
+            this.toggleAnimation();
+        }
+    }
+    
+    toggleFullscreen() {
+        if (!document.fullscreenElement) {
+            this.container.requestFullscreen();
+        } else {
+            document.exitFullscreen();
+        }
+    }
+    
+    updateDescription(name, desc, feature, application, strength) {
+        document.getElementById('structureName').textContent = name;
+        document.getElementById('structureDesc').textContent = desc;
+        
+        const features = document.querySelectorAll('.feature-item');
+        if (features.length >= 3) {
+            features[0].innerHTML = `<strong>特点：</strong>${feature}`;
+            features[1].innerHTML = `<strong>应用：</strong>${application}`;
+            features[2].innerHTML = `<strong>强度：</strong>${strength}`;
+        }
+    }
+    
+    onWindowResize() {
+        this.camera.aspect = this.container.clientWidth / this.container.clientHeight;
+        this.camera.updateProjectionMatrix();
+        this.renderer.setSize(this.container.clientWidth, this.container.clientHeight);
+    }
+    
+    animate() {
+        requestAnimationFrame(() => this.animate());
+        this.controls.update();
+        this.renderer.render(this.scene, this.camera);
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    console.log('DOM loaded, creating Viewer3D...');
+    try {
+        new Viewer3D();
+        console.log('Viewer3D created successfully');
+    } catch (error) {
+        console.error('Error creating Viewer3D:', error);
+    }
+});
+</script>
+</main>
+</body>
+</html>

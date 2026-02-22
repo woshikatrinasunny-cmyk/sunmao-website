@@ -1,0 +1,106 @@
+榫卯结构热区配置说明
+====================
+
+功能说明：
+---------
+在首页的背景图（背景.jpg）上添加了5个可点击的热区，
+每个热区对应一种榫卯结构，点击后跳转到3D查看器并自动加载对应的结构。
+
+热区位置（可调整）：
+------------------
+热区使用百分比坐标定位，方便响应式适配。
+
+当前配置（在 static/hotspot.js 中）：
+
+1. 直榫 (mortise-tenon)
+   位置: x: 25%, y: 40%
+   描述: 最基本的榫卯结构
+
+2. 燕尾榫 (dovetail)
+   位置: x: 45%, y: 35%
+   描述: 抗拉力最强
+
+3. 透榫 (through-tenon)
+   位置: x: 55%, y: 50%
+   描述: 穿透式连接
+
+4. 半搭接 (half-lap)
+   位置: x: 70%, y: 45%
+   描述: 简单实用
+
+5. 指接 (finger-joint)
+   位置: x: 80%, y: 55%
+   描述: 板材拼接
+
+如何调整热区位置：
+----------------
+1. 打开 static/hotspot.js
+2. 找到 this.hotspots 数组
+3. 修改每个热区的 x 和 y 值（0-100的百分比）
+4. 保存后刷新页面即可看到效果
+
+示例：
+```javascript
+{
+    id: 1,
+    name: '直榫',
+    type: 'mortise-tenon',
+    x: 30,  // 修改这里：水平位置（0-100）
+    y: 50,  // 修改这里：垂直位置（0-100）
+    description: '最基本的榫卯结构'
+}
+```
+
+视觉效果：
+---------
+- 白色脉冲圆点标记位置
+- 悬停时显示结构名称和描述
+- 点击有缩放动画反馈
+- 自动跳转到3D查看器
+
+如何根据实际图片调整：
+--------------------
+1. 在浏览器中打开首页
+2. 按F12打开开发者工具
+3. 在Console中输入以下代码查看鼠标位置：
+
+```javascript
+document.getElementById('heroImage').addEventListener('click', function(e) {
+    const rect = this.getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width * 100).toFixed(1);
+    const y = ((e.clientY - rect.top) / rect.height * 100).toFixed(1);
+    console.log(`x: ${x}%, y: ${y}%`);
+});
+```
+
+4. 点击图片上的榫卯结构位置
+5. Console会显示百分比坐标
+6. 将坐标复制到 hotspot.js 中
+
+添加新的热区：
+------------
+在 hotspot.js 的 this.hotspots 数组中添加新对象：
+
+```javascript
+{
+    id: 6,
+    name: '新结构名称',
+    type: 'new-structure-type',  // 需要在viewer3d.js中添加对应的创建函数
+    x: 50,
+    y: 50,
+    description: '结构描述'
+}
+```
+
+移动端优化：
+----------
+- 热区在移动端会自动放大
+- 触摸设备上标签会一直显示
+- 响应式布局自动适配
+
+注意事项：
+---------
+1. 确保背景图（背景.jpg）已正确放置在 static/ 文件夹
+2. 热区位置需要根据实际图片内容调整
+3. 如果图片中没有明显的榫卯结构，可以考虑更换图片
+4. 建议使用包含多个榫卯结构示意图的背景图

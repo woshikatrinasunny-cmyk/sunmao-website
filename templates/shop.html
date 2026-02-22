@@ -1,0 +1,195 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="section">
+    <div class="shop-header">
+        <h2 class="section-title">榫卯文创商品</h2>
+        <div class="shop-search">
+            <input type="text" placeholder="搜索商品名称" class="search-input">
+        </div>
+        <div class="shop-filters">
+            <span class="filter-btn active">官方推荐</span>
+            <span class="filter-btn">益智玩具</span>
+            <span class="filter-btn">建筑模型</span>
+            <span class="filter-btn">家居摆件</span>
+        </div>
+    </div>
+
+    <div class="product-list">
+        <a href="#product1" class="product-item" onclick="showProductDetail(event, 'product1')">
+            <div class="product-img">
+                <img src="{{ url_for('static', filename='images/product1.jpg') }}" 
+                     onerror="this.src='{{ url_for('static', filename='images/placeholder.svg') }}'" 
+                     alt="沉香亭榫卯模型">
+            </div>
+            <div class="product-info">
+                <h3>沉香亭榫卯模型</h3>
+                <p class="product-desc">1:50比例复刻唐代沉香亭，采用优质榉木，纯榫卯结构，含详细组装说明书</p>
+                <p class="product-sales">月销量 300+ · 好评率 98%</p>
+                <p class="product-price">¥ <span>230</span>.00起</p>
+            </div>
+        </a>
+        <a href="#product2" class="product-item" onclick="showProductDetail(event, 'product2')">
+            <div class="product-img">
+                <img src="{{ url_for('static', filename='images/product2.jpg') }}" 
+                     onerror="this.src='{{ url_for('static', filename='images/placeholder.svg') }}'" 
+                     alt="十二生肖鲁班锁套装">
+            </div>
+            <div class="product-info">
+                <h3>十二生肖鲁班锁套装</h3>
+                <p class="product-desc">12款不同难度的鲁班锁，每款对应一个生肖造型，益智解压，适合全年龄段</p>
+                <p class="product-sales">月销量 520+ · 好评率 99%</p>
+                <p class="product-price">¥ <span>88</span>.00起</p>
+            </div>
+        </a>
+        <a href="#product3" class="product-item" onclick="showProductDetail(event, 'product3')">
+            <div class="product-img">
+                <img src="{{ url_for('static', filename='images/product3.jpg') }}" 
+                     onerror="this.src='{{ url_for('static', filename='images/placeholder.svg') }}'" 
+                     alt="黄鹤楼榫卯模型">
+            </div>
+            <div class="product-info">
+                <h3>黄鹤楼榫卯模型</h3>
+                <p class="product-desc">1:75比例还原武汉黄鹤楼，468个零件，全榫卯结构，附赠展示底座</p>
+                <p class="product-sales">月销量 280+ · 好评率 97%</p>
+                <p class="product-price">¥ <span>328</span>.00起</p>
+            </div>
+        </a>
+        <a href="#product4" class="product-item" onclick="showProductDetail(event, 'product4')">
+            <div class="product-img">
+                <img src="{{ url_for('static', filename='images/product4.jpg') }}" 
+                     onerror="this.src='{{ url_for('static', filename='images/placeholder.svg') }}'" 
+                     alt="经典榉木鲁班锁">
+            </div>
+            <div class="product-info">
+                <h3>经典榉木鲁班锁</h3>
+                <p class="product-desc">传统六子联方鲁班锁，精选进口榉木，手工打磨，益智解压，送礼佳品</p>
+                <p class="product-sales">月销量 680+ · 好评率 99%</p>
+                <p class="product-price">¥ <span>58</span>.00起</p>
+            </div>
+        </a>
+        <a href="#product5" class="product-item" onclick="showProductDetail(event, 'product5')">
+            <div class="product-img">
+                <img src="{{ url_for('static', filename='images/placeholder.svg') }}" 
+                     alt="应县木塔精密模型">
+                <div class="placeholder-text">应县木塔模型</div>
+            </div>
+            <div class="product-info">
+                <h3>应县木塔精密模型</h3>
+                <p class="product-desc">1:100比例复刻辽代应县木塔，1200+零件，纯榫卯结构，收藏级精品</p>
+                <p class="product-sales">月销量 150+ · 好评率 100%</p>
+                <p class="product-price">¥ <span>688</span>.00起</p>
+            </div>
+        </a>
+        <a href="#product6" class="product-item" onclick="showProductDetail(event, 'product6')">
+            <div class="product-img">
+                <img src="{{ url_for('static', filename='images/placeholder.svg') }}" 
+                     alt="飞云楼榫卯模型">
+                <div class="placeholder-text">飞云楼模型</div>
+            </div>
+            <div class="product-info">
+                <h3>飞云楼榫卯模型</h3>
+                <p class="product-desc">1:60比例还原万荣飞云楼，三层四檐，斗拱结构精美，附赠文化手册</p>
+                <p class="product-sales">月销量 180+ · 好评率 98%</p>
+                <p class="product-price">¥ <span>398</span>.00起</p>
+            </div>
+        </a>
+        <a href="#product7" class="product-item" onclick="showProductDetail(event, 'product7')">
+            <div class="product-img">
+                <img src="{{ url_for('static', filename='images/placeholder.svg') }}" 
+                     alt="榫卯结构书签套装">
+                <div class="placeholder-text">榫卯书签</div>
+            </div>
+            <div class="product-info">
+                <h3>榫卯结构书签套装</h3>
+                <p class="product-desc">10款经典榫卯结构书签，黄铜材质，激光雕刻，附赠榫卯知识卡片</p>
+                <p class="product-sales">月销量 420+ · 好评率 99%</p>
+                <p class="product-price">¥ <span>39</span>.00起</p>
+            </div>
+        </a>
+        <a href="#product8" class="product-item" onclick="showProductDetail(event, 'product8')">
+            <div class="product-img">
+                <img src="{{ url_for('static', filename='images/placeholder.svg') }}" 
+                     alt="儿童榫卯启蒙积木">
+                <div class="placeholder-text">儿童积木</div>
+            </div>
+            <div class="product-info">
+                <h3>儿童榫卯启蒙积木</h3>
+                <p class="product-desc">120件大颗粒榫卯积木，安全环保，培养空间思维，适合3-8岁儿童</p>
+                <p class="product-sales">月销量 890+ · 好评率 99%</p>
+                <p class="product-price">¥ <span>128</span>.00起</p>
+            </div>
+        </a>
+    </div>
+</section>
+
+<style>
+.product-desc {
+    font-size: 0.85rem;
+    color: var(--text-mid);
+    line-height: 1.5;
+    margin: 8px 0;
+}
+
+.product-img {
+    position: relative;
+    overflow: hidden;
+}
+
+.placeholder-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(184, 160, 126, 0.9);
+    color: white;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    white-space: nowrap;
+    pointer-events: none;
+}
+</style>
+{% endblock %}
+
+
+<script>
+function showProductDetail(event, productId) {
+    event.preventDefault();
+    
+    // 移除其他选中状态
+    document.querySelectorAll('.product-item').forEach(item => {
+        item.classList.remove('selected');
+    });
+    
+    // 添加选中状态
+    event.currentTarget.classList.add('selected');
+    
+    // 这里可以添加显示详情弹窗的逻辑
+    console.log('查看商品详情:', productId);
+    
+    // 简单的提示
+    const productName = event.currentTarget.querySelector('h3').textContent;
+    alert(`商品详情：${productName}\n\n点击确定查看更多信息（功能开发中）`);
+}
+</script>
+
+<style>
+.product-item {
+    cursor: pointer;
+    transition: all 0.3s;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
+.product-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.product-item.selected {
+    border: 2px solid var(--accent);
+    box-shadow: 0 8px 25px rgba(184, 160, 126, 0.3);
+}
+</style>

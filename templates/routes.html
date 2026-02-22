@@ -1,0 +1,276 @@
+{% extends "base.html" %}
+{% block content %}
+<!-- 路线详情页 - 黄河之汤 -->
+<section class="detail-page">
+    <div class="detail-header">
+        <h1 class="detail-title">黄河之汤</h1>
+    </div>
+    <div class="detail-hero">
+        <img src="{{ url_for('static', filename='images/huanghe-route.jpg') }}" 
+             onerror="this.src='{{ url_for('static', filename='images/placeholder.svg') }}'" 
+             alt="黄河沿岸">
+    </div>
+
+    <div class="detail-body">
+        <!-- 左侧竖向标签导航 -->
+        <div class="detail-tabs">
+            <button class="tab-btn active" onclick="switchTab(this, 'intro')">简介</button>
+            <button class="tab-btn" onclick="switchTab(this, 'schedule')">日程及<br>安排</button>
+            <button class="tab-btn" onclick="switchTab(this, 'feedback')">反馈</button>
+        </div>
+
+        <!-- 右侧内容区 -->
+        <div class="detail-content">
+            <div class="tab-panel active" id="intro">
+                <div class="content-card">
+                    <h2>黄河之汤——黄河沿岸旅游线路</h2>
+                    <p>黄河，中华民族的母亲河，全长5464公里，流经九省区，沿岸分布着众多历史文化遗迹与自然景观。本路线以山西段黄河为主线，带您领略黄河沿岸的壮美风光与深厚文化底蕴。</p>
+                    
+                    <h3>线路特色</h3>
+                    <ul style="line-height: 2; color: var(--text-mid);">
+                        <li>🏛️ 探访李家大院，感受晋商文化的辉煌</li>
+                        <li>🌾 参观黄河农耕文明博览园，了解黄河流域农耕历史</li>
+                        <li>⛩️ 游览后土祠，体验中华祭祀文化</li>
+                        <li>🎨 欣赏黄河文化雕塑，领略艺术与自然的完美结合</li>
+                        <li>🚗 自驾黄河一号公路，沿途风光无限</li>
+                        <li>💦 观赏壶口瀑布，感受黄河的磅礴气势</li>
+                    </ul>
+                    
+                    <h3>最佳旅游时间</h3>
+                    <p>春季（4-5月）：气候宜人，万物复苏，适合踏青赏景<br>
+                    秋季（9-10月）：天高云淡，秋色宜人，壶口瀑布水量充沛，最为壮观</p>
+                    
+                    <h3>温馨提示</h3>
+                    <p>• 建议自驾或包车出行，行程更加灵活<br>
+                    • 沿途紫外线较强，注意防晒<br>
+                    • 壶口瀑布景区水雾较大，注意保护相机等电子设备<br>
+                    • 品尝当地特色美食：羊肉泡馍、油糕、麻花等</p>
+                </div>
+            </div>
+            <div class="tab-panel" id="schedule">
+                <div class="content-card">
+                    <h2>黄河之汤——黄河沿岸旅游线路</h2>
+                    <h3>Day1</h3>
+                    <p>李家大院-黄河农耕文明博览园（步行2分钟）前往后土祠附近酒店/民俗（驾车约36分钟），稍作休整</p>
+                    <h3>Day2</h3>
+                    <p>后土祠-黄河文化雕塑博览园（驾车5分钟）<br>
+                    北辛舍利塔（驾车7分钟）<br>
+                    黄河一号公路（自驾或骑行）</p>
+                    <p>1. 线路一：黄河一号旅游公路——九曲黄河景观自驾之旅。<br>
+                    偏关老牛湾→碛口古镇→李家山村→石楼黄河第一湾→永和乾坤湾（黄河一号旅游公路起点）<br>
+                    自驾天数：3—4天；自驾千米数：约623千米</p>
+                    <p>2. 线路二：黄河一号旅游公路——黄河文化探秘自驾之旅。<br>
+                    壶口瀑布→大禹渡→风陵渡→普救寺→鹳雀楼。<br>
+                    自驾天数：3天；自驾千米数：约320千米</p>
+                </div>
+            </div>
+            <div class="tab-panel" id="feedback">
+                <div class="content-card">
+                    <h2>游客反馈</h2>
+                    <div class="feedback-item">
+                        <div class="feedback-avatar">游</div>
+                        <div class="feedback-text">
+                            <p class="feedback-name">游客 · 2025年10月</p>
+                            <p>黄河沿岸的风景太壮观了，尤其是壶口瀑布，震撼人心！</p>
+                        </div>
+                    </div>
+                    <div class="feedback-item">
+                        <div class="feedback-avatar">旅</div>
+                        <div class="feedback-text">
+                            <p class="feedback-name">旅行者 · 2025年9月</p>
+                            <p>路线规划很合理，每个景点都值得细细品味，推荐自驾游。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 更多路线 -->
+<section class="section">
+    <h2 class="section-title">更多路线</h2>
+    <div class="route-list">
+        <div class="route-list-item">
+            <div class="route-list-left">
+                <div class="route-list-tabs">
+                    <button class="tab-btn small active" onclick="switchRouteTab(this, 0, 'intro')">简介</button>
+                    <button class="tab-btn small" onclick="switchRouteTab(this, 0, 'schedule')">日程<br>安排</button>
+                    <button class="tab-btn small" onclick="switchRouteTab(this, 0, 'feedback')">反馈</button>
+                </div>
+            </div>
+            <div class="route-list-content">
+                <div class="tab-content active" data-tab="intro">
+                    <div class="content-card">
+                        <h3>南楼北塔——飞云楼、秋风楼与应县木塔</h3>
+                        <p>探访山西三大木构建筑瑰宝，感受榫卯工艺的极致魅力。飞云楼位于万荣县东岳庙，三层四檐，纯木结构；秋风楼坐落后土祠内，因汉武帝《秋风辞》得名；应县木塔高67米，是世界最高木塔，历经千年不倒。</p>
+                        <p><strong>建议行程：</strong>2天1夜 | <strong>交通方式：</strong>包车或自驾</p>
+                    </div>
+                </div>
+                <div class="tab-content" data-tab="schedule">
+                    <div class="content-card">
+                        <h3>南楼北塔行程安排</h3>
+                        <p><strong>Day1</strong> 飞云楼（万荣东岳庙）-秋风楼（后土祠）（驾车43分钟）-前往应县，在酒店/民宿休整（驾车约8.5小时）</p>
+                        <p><strong>Day2</strong> 应县木塔（佛宫寺）-返程</p>
+                        <p><strong>温馨提示：</strong>建议提前预约导游讲解，深入了解榫卯工艺细节</p>
+                    </div>
+                </div>
+                <div class="tab-content" data-tab="feedback">
+                    <div class="content-card">
+                        <h3>游客反馈</h3>
+                        <div class="feedback-item">
+                            <div class="feedback-avatar">李</div>
+                            <div class="feedback-text">
+                                <p class="feedback-name">李先生 · 2025年11月</p>
+                                <p>三座建筑各有特色，飞云楼的斗拱、应县木塔的高度都让人震撼，不虚此行！</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="route-list-item">
+            <div class="route-list-left">
+                <div class="route-list-tabs">
+                    <button class="tab-btn small active" onclick="switchRouteTab(this, 1, 'intro')">简介</button>
+                    <button class="tab-btn small" onclick="switchRouteTab(this, 1, 'schedule')">日程<br>安排</button>
+                    <button class="tab-btn small" onclick="switchRouteTab(this, 1, 'feedback')">反馈</button>
+                </div>
+            </div>
+            <div class="route-list-content">
+                <div class="tab-content active" data-tab="intro">
+                    <div class="content-card">
+                        <h3>跬步千里——榫承卯接 · 传续非遗</h3>
+                        <p>深度研学路线，探访榫卯文化的前世今生。从飞云楼到应县木塔，从黄河农耕文明到壶口瀑布，全方位感受中华文明的博大精深。</p>
+                        <div class="spot-tags">
+                            <span class="spot-tag">飞云楼</span>
+                            <span class="spot-tag">万荣榫卯手艺人</span>
+                            <span class="spot-tag">应县木塔</span>
+                            <span class="spot-tag">黄河农耕博览园</span>
+                            <span class="spot-tag">壶口瀑布</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-content" data-tab="schedule">
+                    <div class="content-card">
+                        <h3>跬步千里行程安排</h3>
+                        <p><strong>Day1</strong> 飞云楼-拜访榫卯手艺人（体验榫卯制作）-秋风楼</p>
+                        <p><strong>Day2</strong> 黄河农耕文明博览园-壶口瀑布</p>
+                        <p><strong>Day3</strong> 前往应县-应县木塔-返程</p>
+                        <p><strong>特色体验：</strong>跟随老匠人学习基础榫卯制作，亲手完成一件作品</p>
+                    </div>
+                </div>
+                <div class="tab-content" data-tab="feedback">
+                    <div class="content-card">
+                        <h3>游客反馈</h3>
+                        <div class="feedback-item">
+                            <div class="feedback-avatar">张</div>
+                            <div class="feedback-text">
+                                <p class="feedback-name">张女士 · 2025年10月</p>
+                                <p>研学路线安排得很好，孩子对榫卯工艺产生了浓厚兴趣，还亲手做了个小板凳！</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+function switchTab(btn, tabId) {
+    const parent = btn.closest('.detail-body');
+    if (!parent) return;
+    
+    parent.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    parent.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    const panel = document.getElementById(tabId);
+    if (panel) panel.classList.add('active');
+}
+
+function switchRouteTab(btn, itemIndex, tabName) {
+    const item = btn.closest('.route-list-item');
+    if (!item) return;
+    
+    // 切换按钮状态
+    item.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    
+    // 切换内容
+    item.querySelectorAll('.tab-content').forEach(content => {
+        if (content.dataset.tab === tabName) {
+            content.classList.add('active');
+        } else {
+            content.classList.remove('active');
+        }
+    });
+}
+</script>
+
+<style>
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+.feedback-item {
+    display: flex;
+    gap: 12px;
+    margin-top: 15px;
+    padding: 15px;
+    background: var(--bg-cream);
+    border-radius: 8px;
+}
+
+.feedback-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--accent);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    flex-shrink: 0;
+}
+
+.feedback-text {
+    flex: 1;
+}
+
+.feedback-name {
+    font-size: 0.85rem;
+    color: var(--text-mid);
+    margin-bottom: 5px;
+}
+
+.spot-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 15px;
+}
+
+.spot-tag {
+    padding: 6px 12px;
+    background: var(--bg-warm);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    font-size: 0.85rem;
+    color: var(--text-mid);
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.spot-tag:hover, .spot-tag.active {
+    background: var(--accent);
+    color: white;
+    border-color: var(--accent);
+}
+</style>
+{% endblock %}

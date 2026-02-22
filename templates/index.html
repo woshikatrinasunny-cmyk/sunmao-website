@@ -1,0 +1,163 @@
+{% extends "base.html" %}
+{% block content %}
+<!-- Hero Banner with Hotspots -->
+<section class="hero" style="position: relative;">
+    <img id="heroImage" src="{{ url_for('static', filename='背景.jpg') }}" alt="榫卯工艺" class="hero-img">
+    <div id="hotspotContainer" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none;">
+        <!-- 热区将由 hotspot.js 动态生成 -->
+    </div>
+    <div class="hero-overlay">
+        <h1 class="hero-title">榫卯</h1>
+        <p class="hero-subtitle">Mortise and Tenon</p>
+    </div>
+</section>
+
+<!-- 快捷入口 -->
+<section class="quick-entry">
+    <div class="entry-item">
+        <div class="entry-icon">
+            <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 3v18"/></svg>
+        </div>
+        <span>门票</span>
+    </div>
+    <div class="entry-item">
+        <div class="entry-icon">
+            <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        </div>
+        <span>导览</span>
+    </div>
+    <div class="entry-item">
+        <div class="entry-icon">
+            <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+        </div>
+        <span>榫卯知识</span>
+    </div>
+    <div class="entry-item">
+        <div class="entry-icon">
+            <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+        </div>
+        <span>买文物</span>
+    </div>
+</section>
+
+<!-- 榫卯新鲜事 -->
+<section class="section">
+    <h2 class="section-title">榫卯新鲜事</h2>
+    <div class="news-grid">
+        <a href="{{ url_for('culture') }}" class="news-card news-featured" style="text-decoration: none;">
+            <div class="news-img-wrap">
+                <img src="{{ url_for('static', filename='images/news1.jpg') }}" 
+                     onerror="this.src='{{ url_for('static', filename='images/placeholder.svg') }}'" 
+                     alt="榫卯">
+            </div>
+            <div class="news-info">
+                <h3>字形设计·榫卯·建筑</h3>
+                <p class="news-meta">文化探索</p>
+            </div>
+        </a>
+        <a href="{{ url_for('culture') }}" class="news-card" style="text-decoration: none;">
+            <div class="news-img-wrap">
+                <img src="{{ url_for('static', filename='images/news2.jpg') }}" 
+                     onerror="this.src='{{ url_for('static', filename='images/placeholder.svg') }}'" 
+                     alt="木工">
+            </div>
+            <div class="news-info">
+                <h3>大国非遗工匠传承</h3>
+                <p class="news-meta">匠心独运</p>
+            </div>
+        </a>
+        <a href="{{ url_for('culture') }}" class="news-card" style="text-decoration: none;">
+            <div class="news-img-wrap">
+                <img src="{{ url_for('static', filename='images/news3.jpg') }}" 
+                     onerror="this.src='{{ url_for('static', filename='images/placeholder.svg') }}'" 
+                     alt="传统">
+            </div>
+            <div class="news-info">
+                <h3>切磋榫卯图谱精选</h3>
+                <p class="news-meta">图鉴收藏</p>
+            </div>
+        </a>
+    </div>
+</section>
+
+<!-- 精品旅游路线 -->
+<section class="section">
+    <h2 class="section-title">精品旅游路线</h2>
+    <div class="route-cards">
+        <a href="{{ url_for('routes') }}" class="route-card featured-route">
+            <div class="route-card-left">
+                <h3>特色<br>旅游路线</h3>
+                <span class="route-tag">定制包团 ›</span>
+            </div>
+            <div class="route-card-img">
+                <img src="{{ url_for('static', filename='images/route-featured.jpg') }}" 
+                     onerror="this.src='{{ url_for('static', filename='images/placeholder.svg') }}'" 
+                     alt="飞云楼">
+            </div>
+        </a>
+        <a href="{{ url_for('routes') }}" class="route-card">
+            <div class="route-card-content">
+                <h3>南楼北塔</h3>
+                <p>飞云楼、秋风楼与应县木塔</p>
+            </div>
+        </a>
+        <a href="{{ url_for('routes') }}" class="route-card">
+            <div class="route-card-content">
+                <h3>黄河之汤</h3>
+                <p>黄河沿岸旅游路线</p>
+            </div>
+        </a>
+        <a href="{{ url_for('routes') }}" class="route-card">
+            <div class="route-card-content">
+                <h3>跬步千里</h3>
+                <p>精品研学路线</p>
+            </div>
+        </a>
+    </div>
+    <div class="route-mini-cards">
+        <div class="mini-card">
+            <h4>秋日赏银杏路线</h4>
+            <p>5个建筑 · 2.7公里</p>
+        </div>
+        <div class="mini-card">
+            <h4>夏日纳凉路线</h4>
+            <p>12个建筑 · 2.9公里</p>
+        </div>
+    </div>
+    <p class="more-link">收起更多 ∧</p>
+</section>
+
+<!-- 体验推荐 -->
+<section class="section">
+    <h2 class="section-title">体验推荐</h2>
+    <div class="experience-cards">
+        <a href="{{ url_for('viewer3d') }}" class="exp-card" style="text-decoration: none; background: linear-gradient(135deg, #d4a574 0%, #c19a6b 100%); color: white;">
+            <h3 style="color: white;">榫卯3D查看器</h3>
+            <p style="color: rgba(255,255,255,0.9);">360度旋转查看榫卯结构</p>
+        </a>
+        <a href="{{ url_for('culture') }}" class="exp-card" style="text-decoration: none;">
+            <h3>榫卯技艺</h3>
+            <p>探索千年匠心的故事</p>
+        </a>
+        <a href="{{ url_for('routes') }}" class="exp-card" style="text-decoration: none;">
+            <h3>双人成行</h3>
+            <p>感受匠心与有你的邂逅</p>
+        </a>
+        <a href="{{ url_for('routes') }}" class="exp-card" style="text-decoration: none;">
+            <h3>周末小游</h3>
+            <p>让心灵自由呼吸</p>
+        </a>
+        <a href="{{ url_for('routes') }}" class="exp-card" style="text-decoration: none;">
+            <h3>亲子时光</h3>
+            <p>陪孩子走进匠艺时光</p>
+        </a>
+        <a href="{{ url_for('shop') }}" class="exp-card" style="text-decoration: none;">
+            <h3>文创好物</h3>
+            <p>把榫卯工艺带回家</p>
+        </a>
+    </div>
+</section>
+
+<!-- 加载热区脚本 -->
+<script src="{{ url_for('static', filename='hotspot.js') }}"></script>
+{% endblock %}
