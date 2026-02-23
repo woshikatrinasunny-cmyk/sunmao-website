@@ -23,24 +23,35 @@
                 <div class="gallery-main">
                     <img id="qfl-main" src="{{ url_for('static', filename='images/秋风楼日历3.jpg') }}" 
                          onerror="this.src='{{ url_for('static', filename='images/placeholder.svg') }}'" 
-                         alt="秋风楼日历">
+                         alt="秋风楼日历"
+                         loading="lazy">
                 </div>
                 <div class="gallery-thumbs">
                     <img src="{{ url_for('static', filename='images/秋风楼日历3.jpg') }}" 
                          onclick="changeImage(event, 'qfl-main', this.src)"
-                         class="thumb active">
+                         class="thumb active"
+                         loading="lazy"
+                         alt="秋风楼日历样式1">
                     <img src="{{ url_for('static', filename='images/秋风楼日历4.jpg') }}" 
                          onclick="changeImage(event, 'qfl-main', this.src)"
-                         class="thumb">
-                    <img src="{{ url_for('static', filename='images/秋风楼日历1.png') }}" 
+                         class="thumb"
+                         loading="lazy"
+                         alt="秋风楼日历样式2">
+                    <img src="{{ url_for('static', filename='images/秋风楼日历1.jpg') }}" 
                          onclick="changeImage(event, 'qfl-main', this.src)"
-                         class="thumb">
-                    <img src="{{ url_for('static', filename='images/秋风楼日历2.png') }}" 
+                         class="thumb"
+                         loading="lazy"
+                         alt="秋风楼日历样式3">
+                    <img src="{{ url_for('static', filename='images/秋风楼日历2.jpg') }}" 
                          onclick="changeImage(event, 'qfl-main', this.src)"
-                         class="thumb">
-                    <img src="{{ url_for('static', filename='images/秋风楼日历5.png') }}" 
+                         class="thumb"
+                         loading="lazy"
+                         alt="秋风楼日历样式4">
+                    <img src="{{ url_for('static', filename='images/秋风楼日历5.jpg') }}" 
                          onclick="changeImage(event, 'qfl-main', this.src)"
-                         class="thumb">
+                         class="thumb"
+                         loading="lazy"
+                         alt="秋风楼日历样式5">
                 </div>
             </div>
             <div class="product-info">
@@ -56,17 +67,22 @@
             <div class="product-badge">原创设计</div>
             <div class="product-gallery">
                 <div class="gallery-main">
-                    <img id="fyl-main" src="{{ url_for('static', filename='images/飞云楼日历1.png') }}" 
+                    <img id="fyl-main" src="{{ url_for('static', filename='images/飞云楼日历1.jpg') }}" 
                          onerror="this.src='{{ url_for('static', filename='images/placeholder.svg') }}'" 
-                         alt="飞云楼日历">
+                         alt="飞云楼日历"
+                         loading="lazy">
                 </div>
                 <div class="gallery-thumbs">
-                    <img src="{{ url_for('static', filename='images/飞云楼日历1.png') }}" 
+                    <img src="{{ url_for('static', filename='images/飞云楼日历1.jpg') }}" 
                          onclick="changeImage(event, 'fyl-main', this.src)"
-                         class="thumb active">
-                    <img src="{{ url_for('static', filename='images/飞云楼日历2.png') }}" 
+                         class="thumb active"
+                         loading="lazy"
+                         alt="飞云楼日历样式1">
+                    <img src="{{ url_for('static', filename='images/飞云楼日历2.jpg') }}" 
                          onclick="changeImage(event, 'fyl-main', this.src)"
-                         class="thumb">
+                         class="thumb"
+                         loading="lazy"
+                         alt="飞云楼日历样式2">
                 </div>
             </div>
             <div class="product-info">
@@ -234,8 +250,10 @@ document.addEventListener('DOMContentLoaded', function() {
             
             // 筛选商品
             products.forEach(product => {
-                const categories = product.dataset.category;
-                if (categories && categories.includes(category)) {
+                const productCategories = product.dataset.category || '';
+                
+                // 精确匹配分类
+                if (productCategories.split(' ').includes(category)) {
                     product.style.display = 'block';
                 } else {
                     product.style.display = 'none';
@@ -243,6 +261,12 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
     });
+    
+    // 默认显示黄河原创
+    const huangheBtn = document.querySelector('[data-category="huanghe"]');
+    if (huangheBtn) {
+        huangheBtn.click();
+    }
 });
 </script>
 
@@ -317,20 +341,22 @@ document.addEventListener('DOMContentLoaded', function() {
     height: 100%;
     display: flex;
     flex-direction: column;
-    background: var(--bg-cream);
-    padding: 10px;
+    background: linear-gradient(135deg, #faf7f2 0%, #f5f0e8 100%);
+    padding: 15px;
+    border-radius: 8px;
 }
 
 .gallery-main {
     width: 100%;
-    height: 200px;
+    height: 220px;
     border-radius: 8px;
     overflow: hidden;
-    margin-bottom: 10px;
+    margin-bottom: 12px;
     background: white;
     display: flex;
     align-items: center;
     justify-content: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
 .gallery-main img {
@@ -338,37 +364,43 @@ document.addEventListener('DOMContentLoaded', function() {
     height: 100%;
     object-fit: contain;
     transition: transform 0.3s;
+    loading: lazy;
 }
 
 .gallery-main:hover img {
-    transform: scale(1.05);
+    transform: scale(1.08);
 }
 
 .gallery-thumbs {
     display: flex;
-    gap: 6px;
+    gap: 8px;
     justify-content: center;
     flex-wrap: wrap;
 }
 
 .thumb {
-    width: 45px;
-    height: 45px;
-    border-radius: 6px;
+    width: 50px;
+    height: 50px;
+    border-radius: 8px;
     cursor: pointer;
     border: 2px solid transparent;
     transition: all 0.3s;
     object-fit: cover;
+    loading: lazy;
+    background: white;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
 }
 
 .thumb:hover {
     border-color: var(--accent);
-    transform: scale(1.1);
+    transform: scale(1.15);
+    box-shadow: 0 2px 8px rgba(184, 160, 126, 0.3);
 }
 
 .thumb.active {
     border-color: var(--accent-dark);
-    box-shadow: 0 2px 8px rgba(184, 160, 126, 0.4);
+    box-shadow: 0 3px 10px rgba(184, 160, 126, 0.5);
+    transform: scale(1.1);
 }
 </style>
 {% endblock %}
