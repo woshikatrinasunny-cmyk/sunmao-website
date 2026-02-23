@@ -1,0 +1,292 @@
+{% extends "base.html" %}
+{% block content %}
+<!-- 体验详情页 -->
+<section class="detail-page">
+    {% if exp_type == 'craft' %}
+    <div class="detail-header">
+        <h1 class="detail-title">榫卯技艺</h1>
+        <p class="detail-subtitle">探索千年匠心的故事</p>
+    </div>
+    <div class="detail-hero">
+        <img src="{{ url_for('static', filename='images/feiyunlou.jpg') }}" 
+             onerror="this.src='{{ url_for('static', filename='images/placeholder.svg') }}'" 
+             alt="榫卯技艺">
+    </div>
+    <div class="detail-body">
+        <div class="content-card">
+            <h2>榫卯技艺体验</h2>
+            <p>榫卯，是中国古代建筑、家具及其它器械的主要结构方式，是在两个构件上采用凹凸部位相结合的一种连接方式。凸出部分叫榫（或叫榫头）；凹进部分叫卯（或叫榫眼、榫槽）。</p>
+            
+            <h3>体验内容</h3>
+            <ul style="line-height: 2; color: var(--text-mid);">
+                <li>🔨 跟随老匠人学习基础榫卯制作技艺</li>
+                <li>🪵 亲手体验传统木工工具的使用</li>
+                <li>🏛️ 参观飞云楼，近距离观察榫卯结构</li>
+                <li>📚 了解榫卯在中国建筑史上的重要地位</li>
+                <li>🎁 完成一件属于自己的榫卯作品带回家</li>
+            </ul>
+            
+            <h3>适合人群</h3>
+            <p>对传统工艺感兴趣的成人、亲子家庭、学生研学团体</p>
+            
+            <h3>体验时长</h3>
+            <p>半天（约4小时）或全天（约8小时）</p>
+            
+            <h3>费用说明</h3>
+            <p>半天体验：298元/人（含材料费、工具使用费、导师指导费）<br>
+            全天体验：498元/人（含午餐、材料费、工具使用费、导师指导费）</p>
+            
+            <div style="margin-top: 30px; padding: 20px; background: var(--bg-cream); border-radius: 8px;">
+                <h3 style="margin-top: 0;">预约方式</h3>
+                <p>请提前3天预约，联系电话：0359-XXXXXXX<br>
+                地点：山西省运城市万荣县东岳庙飞云楼</p>
+            </div>
+        </div>
+    </div>
+    
+    {% elif exp_type == 'couple' %}
+    <div class="detail-header">
+        <h1 class="detail-title">双人成行</h1>
+        <p class="detail-subtitle">感受匠心与有你的邂逅</p>
+    </div>
+    <div class="detail-hero">
+        <img src="{{ url_for('static', filename='images/qiufenglou.jpg') }}" 
+             onerror="this.src='{{ url_for('static', filename='images/placeholder.svg') }}'" 
+             alt="双人成行">
+    </div>
+    <div class="detail-body">
+        <div class="content-card">
+            <h2>双人浪漫之旅</h2>
+            <p>携手爱人，漫步在千年古建之间，感受榫卯工艺如同爱情般的紧密契合。在黄河之畔，许下永恒的誓言。</p>
+            
+            <h3>行程亮点</h3>
+            <ul style="line-height: 2; color: var(--text-mid);">
+                <li>💑 飞云楼下拍摄古风情侣照</li>
+                <li>🌅 黄河边观赏日落，感受大自然的浪漫</li>
+                <li>🍽️ 品尝地道晋菜，体验当地美食文化</li>
+                <li>🏨 入住特色民宿，享受二人世界</li>
+                <li>🎁 共同制作一件榫卯作品，留作纪念</li>
+            </ul>
+            
+            <h3>推荐行程</h3>
+            <p><strong>Day1</strong> 抵达万荣-飞云楼参观-秋风楼-黄河边观日落-入住民宿<br>
+            <strong>Day2</strong> 榫卯技艺体验-午餐-返程</p>
+            
+            <h3>套餐价格</h3>
+            <p>1680元/2人（含住宿1晚、门票、体验费、部分餐饮）</p>
+            
+            <div style="margin-top: 30px; padding: 20px; background: var(--bg-cream); border-radius: 8px;">
+                <h3 style="margin-top: 0;">预约咨询</h3>
+                <p>联系电话：0359-XXXXXXX<br>
+                微信客服：sunmao_travel</p>
+            </div>
+        </div>
+    </div>
+    
+    {% elif exp_type == 'weekend' %}
+    <div class="detail-header">
+        <h1 class="detail-title">周末小游</h1>
+        <p class="detail-subtitle">让心灵自由呼吸</p>
+    </div>
+    <div class="detail-hero">
+        <img src="{{ url_for('static', filename='images/hukoupu.jpg') }}" 
+             onerror="this.src='{{ url_for('static', filename='images/placeholder.svg') }}'" 
+             alt="周末小游">
+    </div>
+    <div class="detail-body">
+        <div class="content-card">
+            <h2>周末轻松游</h2>
+            <p>利用周末两天时间，逃离城市的喧嚣，来一场说走就走的文化之旅。不赶时间，不赶景点，慢慢感受每一处风景。</p>
+            
+            <h3>行程特色</h3>
+            <ul style="line-height: 2; color: var(--text-mid);">
+                <li>🚗 自驾或包车，行程灵活自由</li>
+                <li>🏛️ 精选2-3个核心景点，不走马观花</li>
+                <li>☕ 在古建筑旁的茶馆小憩，享受慢时光</li>
+                <li>📸 充足的拍照时间，记录美好瞬间</li>
+                <li>🍜 品尝地道小吃，体验当地生活</li>
+            </ul>
+            
+            <h3>推荐路线</h3>
+            <p><strong>路线A：古建筑之旅</strong><br>
+            飞云楼-秋风楼-后土祠（2天1夜）</p>
+            
+            <p><strong>路线B：黄河风光游</strong><br>
+            壶口瀑布-黄河一号公路-黄河农耕博览园（2天1夜）</p>
+            
+            <h3>参考费用</h3>
+            <p>人均800-1200元（含住宿、门票、部分餐饮，不含交通）</p>
+            
+            <div style="margin-top: 30px; padding: 20px; background: var(--bg-cream); border-radius: 8px;">
+                <h3 style="margin-top: 0;">出行建议</h3>
+                <p>• 建议周五下午出发，周日下午返程<br>
+                • 提前预订住宿，周末房源较紧张<br>
+                • 春秋季节最佳，气候宜人</p>
+            </div>
+        </div>
+    </div>
+    
+    {% elif exp_type == 'family' %}
+    <div class="detail-header">
+        <h1 class="detail-title">亲子时光</h1>
+        <p class="detail-subtitle">陪孩子走进匠艺时光</p>
+    </div>
+    <div class="detail-hero">
+        <img src="{{ url_for('static', filename='images/yingxianmuta.jpg') }}" 
+             onerror="this.src='{{ url_for('static', filename='images/placeholder.svg') }}'" 
+             alt="亲子时光">
+    </div>
+    <div class="detail-body">
+        <div class="content-card">
+            <h2>亲子研学之旅</h2>
+            <p>带孩子走出课本，在实践中学习中国传统文化。通过参观古建筑、体验榫卯制作，培养孩子的动手能力和文化自信。</p>
+            
+            <h3>活动内容</h3>
+            <ul style="line-height: 2; color: var(--text-mid);">
+                <li>👨‍👩‍👧‍👦 参观应县木塔，了解古代建筑智慧</li>
+                <li>🔧 亲子共同完成榫卯作品制作</li>
+                <li>📖 专业导师讲解榫卯历史与文化</li>
+                <li>🎨 榫卯主题绘画创作活动</li>
+                <li>🏆 颁发研学证书，记录成长时刻</li>
+            </ul>
+            
+            <h3>适合年龄</h3>
+            <p>6-15岁儿童及家长</p>
+            
+            <h3>行程安排</h3>
+            <p><strong>Day1</strong> 抵达-飞云楼参观-榫卯知识讲座-入住酒店<br>
+            <strong>Day2</strong> 榫卯制作体验-午餐-应县木塔参观-返程</p>
+            
+            <h3>套餐价格</h3>
+            <p>成人：680元/人<br>
+            儿童（6-15岁）：480元/人<br>
+            （含住宿1晚、门票、体验费、研学材料、部分餐饮）</p>
+            
+            <div style="margin-top: 30px; padding: 20px; background: var(--bg-cream); border-radius: 8px;">
+                <h3 style="margin-top: 0;">报名方式</h3>
+                <p>团队报名（10人以上）可享9折优惠<br>
+                联系电话：0359-XXXXXXX<br>
+                适合寒暑假、周末出行</p>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+</section>
+
+<!-- 相关推荐 -->
+<section class="section">
+    <h2 class="section-title" style="text-align: center;">更多体验</h2>
+    <div class="experience-cards">
+        <a href="{{ url_for('viewer3d') }}" class="exp-card" style="text-decoration: none; background: linear-gradient(135deg, #d4a574 0%, #c19a6b 100%); color: white;">
+            <h3 style="color: white;">榫卯3D查看器</h3>
+            <p style="color: rgba(255,255,255,0.9);">360度旋转查看榫卯结构</p>
+        </a>
+        {% if exp_type != 'craft' %}
+        <a href="{{ url_for('experience', exp_type='craft') }}" class="exp-card" style="text-decoration: none;">
+            <h3>榫卯技艺</h3>
+            <p>探索千年匠心的故事</p>
+        </a>
+        {% endif %}
+        {% if exp_type != 'couple' %}
+        <a href="{{ url_for('experience', exp_type='couple') }}" class="exp-card" style="text-decoration: none;">
+            <h3>双人成行</h3>
+            <p>感受匠心与有你的邂逅</p>
+        </a>
+        {% endif %}
+        {% if exp_type != 'weekend' %}
+        <a href="{{ url_for('experience', exp_type='weekend') }}" class="exp-card" style="text-decoration: none;">
+            <h3>周末小游</h3>
+            <p>让心灵自由呼吸</p>
+        </a>
+        {% endif %}
+        {% if exp_type != 'family' %}
+        <a href="{{ url_for('experience', exp_type='family') }}" class="exp-card" style="text-decoration: none;">
+            <h3>亲子时光</h3>
+            <p>陪孩子走进匠艺时光</p>
+        </a>
+        {% endif %}
+        <a href="{{ url_for('shop') }}" class="exp-card" style="text-decoration: none;">
+            <h3>文创好物</h3>
+            <p>把榫卯工艺带回家</p>
+        </a>
+    </div>
+</section>
+
+<style>
+.detail-page {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.detail-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.detail-title {
+    font-size: 2.5rem;
+    color: var(--text-dark);
+    margin-bottom: 10px;
+}
+
+.detail-subtitle {
+    font-size: 1.1rem;
+    color: var(--text-mid);
+}
+
+.detail-hero {
+    width: 100%;
+    height: 400px;
+    overflow: hidden;
+    border-radius: 12px;
+    margin-bottom: 40px;
+}
+
+.detail-hero img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.detail-body {
+    display: flex;
+    gap: 30px;
+}
+
+.content-card {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.content-card h2 {
+    color: var(--accent);
+    margin-bottom: 15px;
+    font-size: 1.8rem;
+}
+
+.content-card h3 {
+    color: var(--text-dark);
+    margin-top: 25px;
+    margin-bottom: 12px;
+    font-size: 1.3rem;
+}
+
+.content-card p {
+    line-height: 1.8;
+    color: var(--text-mid);
+    margin-bottom: 15px;
+}
+
+.content-card ul {
+    padding-left: 20px;
+    margin-bottom: 15px;
+}
+
+.content-card ul li {
+    margin-bottom: 8px;
+}
+</style>
+{% endblock %}

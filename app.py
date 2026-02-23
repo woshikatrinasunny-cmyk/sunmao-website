@@ -26,6 +26,14 @@ def profile():
 def viewer3d():
     return render_template('viewer3d.html')
 
+@app.route('/experience/<exp_type>')
+def experience(exp_type):
+    return render_template('experience.html', exp_type=exp_type)
+
+@app.route('/route_detail/<route_name>')
+def route_detail(route_name):
+    return render_template('route_detail.html', route_name=route_name)
+
 if __name__ == '__main__':
     # 开发环境：使用localhost（WebXR支持）
     # 生产环境：Render会自动设置PORT环境变量

@@ -1,0 +1,520 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!-- 路线详情页 -->
+<section class="detail-page">
+    {% if route_name == 'nanlou-beita' %}
+    <div class="detail-header">
+        <h1 class="detail-title">南楼北塔</h1>
+        <p class="detail-subtitle">飞云楼、秋风楼与应县木塔</p>
+    </div>
+    <div class="detail-hero">
+        <img src="{{ url_for('static', filename='images/yingxianmuta.jpg') }}" 
+             onerror="this.src='{{ url_for('static', filename='images/placeholder.svg') }}'" 
+             alt="应县木塔">
+    </div>
+
+    <div class="detail-body">
+        <div class="detail-tabs">
+            <button class="tab-btn active" onclick="switchTab(this, 'intro')">简介</button>
+            <button class="tab-btn" onclick="switchTab(this, 'schedule')">日程及<br>安排</button>
+            <button class="tab-btn" onclick="switchTab(this, 'feedback')">反馈</button>
+        </div>
+
+        <div class="detail-content">
+            <div class="tab-panel active" id="intro">
+                <div class="content-card">
+                    <h2>南楼北塔——飞云楼、秋风楼与应县木塔</h2>
+                    <p>探访山西三大木构建筑瑰宝，感受榫卯工艺的极致魅力。这三座建筑代表了中国古代木结构建筑的最高成就，每一处都凝聚着古代工匠的智慧与匠心。</p>
+                    
+                    <h3>飞云楼</h3>
+                    <p>位于万荣县东岳庙内，建于明正德十年（1515年），纯木结构，三层四檐，高23.19米。整座楼阁不用一钉一铆，全靠榫卯结构连接，历经500余年风雨依然稳固如初。飞云楼的斗拱层层叠叠，精美绝伦，被誉为"中华第一木楼"。</p>
+                    
+                    <h3>秋风楼</h3>
+                    <p>坐落于万荣县后土祠内，因汉武帝《秋风辞》而得名。楼高三层，纯木结构，建筑风格古朴典雅。登楼远眺，可见黄河奔流，感受"秋风起兮白云飞"的壮阔意境。</p>
+                    
+                    <h3>应县木塔</h3>
+                    <p>全名佛宫寺释迦塔，位于山西省朔州市应县，建于辽清宁二年（1056年），是世界上现存最高、最古老的纯木结构塔式建筑。塔高67.31米，底层直径30.27米，全塔共用木材3000立方米，2600多吨，纯木结构，无钉无铆。历经千年地震、战火而不倒，堪称中国古建筑的奇迹。</p>
+                    
+                    <h3>线路特色</h3>
+                    <ul style="line-height: 2; color: var(--text-mid);">
+                        <li>🏛️ 三座国宝级木构建筑，一次看遍</li>
+                        <li>🔨 近距离观察榫卯结构的精妙之处</li>
+                        <li>📸 绝佳的摄影取景地</li>
+                        <li>👨‍🏫 专业导游讲解建筑历史与工艺</li>
+                        <li>🎓 适合建筑专业学生研学考察</li>
+                    </ul>
+                    
+                    <h3>最佳旅游时间</h3>
+                    <p>春季（4-5月）和秋季（9-10月）气候宜人，适合出行</p>
+                </div>
+            </div>
+            <div class="tab-panel" id="schedule">
+                <div class="content-card">
+                    <h2>南楼北塔行程安排</h2>
+                    <h3>Day 1</h3>
+                    <p><strong>上午：</strong>抵达万荣县，参观飞云楼（东岳庙）<br>
+                    游览时间：2-3小时<br>
+                    亮点：近距离观察飞云楼的斗拱结构，了解榫卯工艺的精妙</p>
+                    
+                    <p><strong>中午：</strong>品尝万荣特色美食（凉粉、羊肉泡馍）</p>
+                    
+                    <p><strong>下午：</strong>前往后土祠，参观秋风楼（驾车约43分钟）<br>
+                    游览时间：2小时<br>
+                    亮点：登楼远眺黄河，感受汉武帝《秋风辞》的意境</p>
+                    
+                    <p><strong>晚上：</strong>前往应县（驾车约8.5小时，建议中途在太原休息）<br>
+                    入住应县酒店/民宿</p>
+                    
+                    <h3>Day 2</h3>
+                    <p><strong>上午：</strong>参观应县木塔（佛宫寺）<br>
+                    游览时间：2-3小时<br>
+                    亮点：世界最高木塔，千年不倒的建筑奇迹</p>
+                    
+                    <p><strong>中午：</strong>品尝应县特色美食（应县凉粉、油糕）</p>
+                    
+                    <p><strong>下午：</strong>返程</p>
+                    
+                    <h3>温馨提示</h3>
+                    <p>• 建议包车或自驾，行程更加灵活<br>
+                    • 飞云楼和应县木塔内部不允许攀登，只能外观<br>
+                    • 建议聘请专业导游讲解，更深入了解建筑文化<br>
+                    • 携带相机，记录精彩瞬间</p>
+                </div>
+            </div>
+            <div class="tab-panel" id="feedback">
+                <div class="content-card">
+                    <h2>游客反馈</h2>
+                    <div class="feedback-item">
+                        <div class="feedback-avatar">李</div>
+                        <div class="feedback-text">
+                            <p class="feedback-name">李先生 · 2025年11月</p>
+                            <p>三座建筑各有特色，飞云楼的斗拱、应县木塔的高度都让人震撼，不虚此行！作为建筑专业的学生，这次旅行让我对榫卯工艺有了更深的理解。</p>
+                        </div>
+                    </div>
+                    <div class="feedback-item">
+                        <div class="feedback-avatar">王</div>
+                        <div class="feedback-text">
+                            <p class="feedback-name">王女士 · 2025年10月</p>
+                            <p>导游讲解非常专业，让我们了解了很多建筑背后的故事。应县木塔真的太壮观了，千年不倒，古人的智慧令人敬佩！</p>
+                        </div>
+                    </div>
+                    <div class="feedback-item">
+                        <div class="feedback-avatar">张</div>
+                        <div class="feedback-text">
+                            <p class="feedback-name">张先生 · 2025年9月</p>
+                            <p>路线安排合理，两天时间刚刚好。飞云楼和秋风楼距离很近，可以一起游览。强烈推荐给喜欢古建筑的朋友！</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    {% elif route_name == 'huanghe' %}
+    <div class="detail-header">
+        <h1 class="detail-title">黄河之汤</h1>
+        <p class="detail-subtitle">黄河沿岸旅游路线</p>
+    </div>
+    <div class="detail-hero">
+        <img src="{{ url_for('static', filename='images/huanghe-route.jpg') }}" 
+             onerror="this.src='{{ url_for('static', filename='images/placeholder.svg') }}'" 
+             alt="黄河沿岸">
+    </div>
+
+    <div class="detail-body">
+        <div class="detail-tabs">
+            <button class="tab-btn active" onclick="switchTab(this, 'intro')">简介</button>
+            <button class="tab-btn" onclick="switchTab(this, 'schedule')">日程及<br>安排</button>
+            <button class="tab-btn" onclick="switchTab(this, 'feedback')">反馈</button>
+        </div>
+
+        <div class="detail-content">
+            <div class="tab-panel active" id="intro">
+                <div class="content-card">
+                    <h2>黄河之汤——黄河沿岸旅游线路</h2>
+                    <p>黄河，中华民族的母亲河，全长5464公里，流经九省区，沿岸分布着众多历史文化遗迹与自然景观。本路线以山西段黄河为主线，带您领略黄河沿岸的壮美风光与深厚文化底蕴。</p>
+                    
+                    <h3>线路特色</h3>
+                    <ul style="line-height: 2; color: var(--text-mid);">
+                        <li>🏛️ 探访李家大院，感受晋商文化的辉煌</li>
+                        <li>🌾 参观黄河农耕文明博览园，了解黄河流域农耕历史</li>
+                        <li>⛩️ 游览后土祠，体验中华祭祀文化</li>
+                        <li>🎨 欣赏黄河文化雕塑，领略艺术与自然的完美结合</li>
+                        <li>🚗 自驾黄河一号公路，沿途风光无限</li>
+                        <li>💦 观赏壶口瀑布，感受黄河的磅礴气势</li>
+                    </ul>
+                    
+                    <h3>最佳旅游时间</h3>
+                    <p>春季（4-5月）：气候宜人，万物复苏，适合踏青赏景<br>
+                    秋季（9-10月）：天高云淡，秋色宜人，壶口瀑布水量充沛，最为壮观</p>
+                    
+                    <h3>温馨提示</h3>
+                    <p>• 建议自驾或包车出行，行程更加灵活<br>
+                    • 沿途紫外线较强，注意防晒<br>
+                    • 壶口瀑布景区水雾较大，注意保护相机等电子设备<br>
+                    • 品尝当地特色美食：羊肉泡馍、油糕、麻花等</p>
+                </div>
+            </div>
+            <div class="tab-panel" id="schedule">
+                <div class="content-card">
+                    <h2>黄河之汤行程安排</h2>
+                    <h3>Day 1</h3>
+                    <p><strong>上午：</strong>李家大院参观<br>
+                    游览时间：2-3小时<br>
+                    亮点：晋商大院建筑群，了解晋商文化</p>
+                    
+                    <p><strong>中午：</strong>品尝当地特色午餐</p>
+                    
+                    <p><strong>下午：</strong>黄河农耕文明博览园（步行2分钟）<br>
+                    游览时间：2小时<br>
+                    亮点：了解黄河流域农耕文明发展史</p>
+                    
+                    <p><strong>晚上：</strong>前往后土祠附近酒店/民宿（驾车约36分钟），稍作休整</p>
+                    
+                    <h3>Day 2</h3>
+                    <p><strong>上午：</strong>后土祠参观<br>
+                    游览时间：2小时<br>
+                    亮点：中华祭祀文化圣地，秋风楼</p>
+                    
+                    <p><strong>中午：</strong>黄河文化雕塑博览园（驾车5分钟）<br>
+                    游览时间：1小时</p>
+                    
+                    <p><strong>下午：</strong>黄河一号公路自驾<br>
+                    <strong>线路一：</strong>九曲黄河景观自驾之旅<br>
+                    偏关老牛湾→碛口古镇→李家山村→石楼黄河第一湾→永和乾坤湾<br>
+                    自驾天数：3-4天 | 约623千米</p>
+                    
+                    <p><strong>线路二：</strong>黄河文化探秘自驾之旅<br>
+                    壶口瀑布→大禹渡→风陵渡→普救寺→鹳雀楼<br>
+                    自驾天数：3天 | 约320千米</p>
+                </div>
+            </div>
+            <div class="tab-panel" id="feedback">
+                <div class="content-card">
+                    <h2>游客反馈</h2>
+                    <div class="feedback-item">
+                        <div class="feedback-avatar">游</div>
+                        <div class="feedback-text">
+                            <p class="feedback-name">游客 · 2025年10月</p>
+                            <p>黄河沿岸的风景太壮观了，尤其是壶口瀑布，震撼人心！黄河一号公路沿途风光无限，非常适合自驾。</p>
+                        </div>
+                    </div>
+                    <div class="feedback-item">
+                        <div class="feedback-avatar">旅</div>
+                        <div class="feedback-text">
+                            <p class="feedback-name">旅行者 · 2025年9月</p>
+                            <p>路线规划很合理，每个景点都值得细细品味，推荐自驾游。李家大院和后土祠都很有文化底蕴。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    {% elif route_name == 'kuibu-qianli' %}
+    <div class="detail-header">
+        <h1 class="detail-title">跬步千里</h1>
+        <p class="detail-subtitle">榫承卯接 · 传续非遗</p>
+    </div>
+    <div class="detail-hero">
+        <img src="{{ url_for('static', filename='images/feiyunlou.jpg') }}" 
+             onerror="this.src='{{ url_for('static', filename='images/placeholder.svg') }}'" 
+             alt="飞云楼">
+    </div>
+
+    <div class="detail-body">
+        <div class="detail-tabs">
+            <button class="tab-btn active" onclick="switchTab(this, 'intro')">简介</button>
+            <button class="tab-btn" onclick="switchTab(this, 'schedule')">日程及<br>安排</button>
+            <button class="tab-btn" onclick="switchTab(this, 'feedback')">反馈</button>
+        </div>
+
+        <div class="detail-content">
+            <div class="tab-panel active" id="intro">
+                <div class="content-card">
+                    <h2>跬步千里——榫承卯接 · 传续非遗</h2>
+                    <p>深度研学路线，探访榫卯文化的前世今生。从飞云楼到应县木塔，从黄河农耕文明到壶口瀑布，全方位感受中华文明的博大精深。本路线特别适合学生研学、亲子教育和文化爱好者深度体验。</p>
+                    
+                    <h3>研学亮点</h3>
+                    <ul style="line-height: 2; color: var(--text-mid);">
+                        <li>🏛️ 参观飞云楼，学习榫卯结构原理</li>
+                        <li>👨‍🏫 拜访万荣榫卯手艺人，体验榫卯制作</li>
+                        <li>🗼 探访应县木塔，了解千年不倒的建筑奇迹</li>
+                        <li>🌾 黄河农耕博览园，认识农耕文明发展史</li>
+                        <li>💦 壶口瀑布，感受黄河母亲的磅礴气势</li>
+                        <li>📜 颁发研学证书，记录成长时刻</li>
+                    </ul>
+                    
+                    <h3>适合人群</h3>
+                    <p>中小学生研学团体、亲子家庭、建筑专业学生、传统文化爱好者</p>
+                    
+                    <h3>研学目标</h3>
+                    <p>• 了解榫卯工艺的历史与文化价值<br>
+                    • 培养动手能力和创新思维<br>
+                    • 增强文化自信和民族自豪感<br>
+                    • 体验非遗传承的重要意义</p>
+                </div>
+            </div>
+            <div class="tab-panel" id="schedule">
+                <div class="content-card">
+                    <h2>跬步千里行程安排</h2>
+                    <h3>Day 1：榫卯文化探索</h3>
+                    <p><strong>上午：</strong>飞云楼参观<br>
+                    • 专业导师讲解榫卯结构原理<br>
+                    • 近距离观察斗拱、梁柱连接方式<br>
+                    • 绘制榫卯结构草图</p>
+                    
+                    <p><strong>下午：</strong>拜访榫卯手艺人<br>
+                    • 观摩传统榫卯制作工艺<br>
+                    • 亲手体验榫卯制作（制作简单榫卯结构）<br>
+                    • 与老匠人交流，了解非遗传承故事</p>
+                    
+                    <p><strong>晚上：</strong>秋风楼参观，入住民宿<br>
+                    • 研学日记撰写<br>
+                    • 分享今日收获</p>
+                    
+                    <h3>Day 2：黄河文明体验</h3>
+                    <p><strong>上午：</strong>黄河农耕文明博览园<br>
+                    • 了解黄河流域农耕文明发展史<br>
+                    • 认识传统农具与农耕技术<br>
+                    • 体验传统农耕活动</p>
+                    
+                    <p><strong>下午：</strong>壶口瀑布<br>
+                    • 观赏黄河壶口瀑布壮观景象<br>
+                    • 了解黄河地理知识<br>
+                    • 朗诵《黄河颂》等经典诗文</p>
+                    
+                    <p><strong>晚上：</strong>前往应县，入住酒店</p>
+                    
+                    <h3>Day 3：建筑奇迹探秘</h3>
+                    <p><strong>上午：</strong>应县木塔参观<br>
+                    • 了解辽代建筑特点<br>
+                    • 学习木塔千年不倒的科学原理<br>
+                    • 测量、记录木塔数据</p>
+                    
+                    <p><strong>下午：</strong>研学总结与分享<br>
+                    • 小组展示研学成果<br>
+                    • 颁发研学证书<br>
+                    • 返程</p>
+                    
+                    <h3>研学配套</h3>
+                    <p>• 研学手册（含任务卡、记录表）<br>
+                    • 榫卯制作材料包<br>
+                    • 专业研学导师全程陪同<br>
+                    • 研学证书<br>
+                    • 集体照片</p>
+                </div>
+            </div>
+            <div class="tab-panel" id="feedback">
+                <div class="content-card">
+                    <h2>游客反馈</h2>
+                    <div class="feedback-item">
+                        <div class="feedback-avatar">张</div>
+                        <div class="feedback-text">
+                            <p class="feedback-name">张女士 · 2025年10月</p>
+                            <p>研学路线安排得很好，孩子对榫卯工艺产生了浓厚兴趣，还亲手做了个小板凳！导师讲解专业又生动，孩子们都听得很认真。</p>
+                        </div>
+                    </div>
+                    <div class="feedback-item">
+                        <div class="feedback-avatar">刘</div>
+                        <div class="feedback-text">
+                            <p class="feedback-name">刘老师 · 2025年9月</p>
+                            <p>带学生参加了这次研学活动，收获满满。不仅学到了榫卯知识，还培养了动手能力和团队协作精神。强烈推荐给其他学校！</p>
+                        </div>
+                    </div>
+                    <div class="feedback-item">
+                        <div class="feedback-avatar">陈</div>
+                        <div class="feedback-text">
+                            <p class="feedback-name">陈先生 · 2025年8月</p>
+                            <p>作为家长，我很满意这次研学安排。行程丰富但不紧张，孩子既玩得开心又学到了知识。榫卯手艺人的讲解让我们全家都受益匪浅。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+</section>
+
+<script>
+function switchTab(btn, tabId) {
+    const parent = btn.closest('.detail-body');
+    if (!parent) return;
+    
+    parent.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    parent.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    const panel = document.getElementById(tabId);
+    if (panel) panel.classList.add('active');
+}
+</script>
+
+<style>
+.detail-page {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.detail-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.detail-title {
+    font-size: 2.5rem;
+    color: var(--text-dark);
+    margin-bottom: 10px;
+}
+
+.detail-subtitle {
+    font-size: 1.1rem;
+    color: var(--text-mid);
+}
+
+.detail-hero {
+    width: 100%;
+    height: 400px;
+    overflow: hidden;
+    border-radius: 12px;
+    margin-bottom: 40px;
+}
+
+.detail-hero img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.detail-body {
+    display: flex;
+    gap: 30px;
+}
+
+.detail-tabs {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    min-width: 100px;
+}
+
+.tab-btn {
+    padding: 12px 20px;
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-size: 0.95rem;
+    color: var(--text-mid);
+    text-align: center;
+    line-height: 1.4;
+}
+
+.tab-btn:hover {
+    background: var(--bg-warm);
+    border-color: var(--accent);
+}
+
+.tab-btn.active {
+    background: var(--accent);
+    color: white;
+    border-color: var(--accent);
+}
+
+.detail-content {
+    flex: 1;
+}
+
+.tab-panel {
+    display: none;
+}
+
+.tab-panel.active {
+    display: block;
+}
+
+.content-card {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.content-card h2 {
+    color: var(--accent);
+    margin-bottom: 15px;
+    font-size: 1.8rem;
+}
+
+.content-card h3 {
+    color: var(--text-dark);
+    margin-top: 25px;
+    margin-bottom: 12px;
+    font-size: 1.3rem;
+}
+
+.content-card p {
+    line-height: 1.8;
+    color: var(--text-mid);
+    margin-bottom: 15px;
+}
+
+.content-card ul {
+    padding-left: 20px;
+    margin-bottom: 15px;
+}
+
+.content-card ul li {
+    margin-bottom: 8px;
+}
+
+.feedback-item {
+    display: flex;
+    gap: 12px;
+    margin-top: 15px;
+    padding: 15px;
+    background: var(--bg-cream);
+    border-radius: 8px;
+}
+
+.feedback-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--accent);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    flex-shrink: 0;
+}
+
+.feedback-text {
+    flex: 1;
+}
+
+.feedback-name {
+    font-size: 0.85rem;
+    color: var(--text-mid);
+    margin-bottom: 5px;
+}
+
+@media (max-width: 768px) {
+    .detail-body {
+        flex-direction: column;
+    }
+    
+    .detail-tabs {
+        flex-direction: row;
+        overflow-x: auto;
+    }
+    
+    .tab-btn {
+        min-width: 80px;
+    }
+}
+</style>
+{% endblock %}

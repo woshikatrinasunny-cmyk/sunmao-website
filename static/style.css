@@ -186,6 +186,8 @@ img {
     gap: 10px;
     cursor: pointer;
     transition: transform 0.2s;
+    text-decoration: none;
+    color: inherit;
 }
 
 .entry-item:hover {
@@ -201,6 +203,12 @@ img {
     align-items: center;
     justify-content: center;
     color: var(--accent-dark);
+    transition: all 0.3s;
+}
+
+.entry-item:hover .entry-icon {
+    background: var(--accent);
+    color: white;
 }
 
 .entry-item span {
@@ -381,24 +389,28 @@ img {
 /* ===== 体验卡片（横屏网格） ===== */
 .experience-cards {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(3, 1fr);
     gap: 14px;
 }
 
 .exp-card {
     background: var(--bg-card);
     border-radius: 12px;
-    padding: 20px 24px;
+    padding: 24px;
     display: flex;
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
-    justify-content: space-between;
+    text-align: center;
     cursor: pointer;
     transition: all 0.2s;
+    min-height: 120px;
 }
 
 .exp-card:hover {
     background: #f0ebe0;
     box-shadow: 0 6px 20px rgba(139, 115, 85, 0.1);
+    transform: translateY(-3px);
 }
 
 .exp-featured {
@@ -423,6 +435,7 @@ img {
 .exp-card h3 {
     font-size: 1rem;
     font-weight: 700;
+    margin-bottom: 6px;
 }
 
 .exp-card p {
@@ -434,6 +447,8 @@ img {
 /* ===== 详情页（横屏） ===== */
 .detail-page {
     padding-bottom: 40px;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 .detail-header {
@@ -447,6 +462,12 @@ img {
     font-weight: 900;
     letter-spacing: 0.2em;
     color: var(--text-dark);
+}
+
+.detail-subtitle {
+    font-size: 1rem;
+    color: var(--text-mid);
+    margin-top: 8px;
 }
 
 .detail-hero {
@@ -519,6 +540,7 @@ img {
     background: var(--bg-card);
     border-radius: 12px;
     padding: 28px 32px;
+    width: 100%;
 }
 
 .content-card h2 {
@@ -540,6 +562,10 @@ img {
     line-height: 1.9;
     color: var(--text-mid);
     margin-bottom: 10px;
+}
+
+.content-card ul {
+    padding-left: 20px;
 }
 
 /* 反馈 */
@@ -897,6 +923,9 @@ img {
     .product-list {
         grid-template-columns: 1fr;
     }
+    .experience-cards {
+        grid-template-columns: 1fr 1fr;
+    }
 }
 
 @media (max-width: 600px) {
@@ -926,6 +955,10 @@ img {
     }
     .detail-body {
         padding: 20px;
+    }
+    .quick-entry {
+        gap: 24px;
+        padding: 24px 20px;
     }
 }
 

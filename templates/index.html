@@ -14,30 +14,30 @@
 
 <!-- 快捷入口 -->
 <section class="quick-entry">
-    <div class="entry-item">
+    <a href="{{ url_for('routes') }}" class="entry-item">
         <div class="entry-icon">
             <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 3v18"/></svg>
         </div>
         <span>门票</span>
-    </div>
-    <div class="entry-item">
+    </a>
+    <a href="{{ url_for('routes') }}" class="entry-item">
         <div class="entry-icon">
             <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
         </div>
         <span>导览</span>
-    </div>
-    <div class="entry-item">
+    </a>
+    <a href="{{ url_for('culture') }}" class="entry-item">
         <div class="entry-icon">
             <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
         </div>
         <span>榫卯知识</span>
-    </div>
-    <div class="entry-item">
+    </a>
+    <a href="{{ url_for('shop') }}" class="entry-item">
         <div class="entry-icon">
             <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
         </div>
         <span>买文物</span>
-    </div>
+    </a>
 </section>
 
 <!-- 榫卯新鲜事 -->
@@ -82,7 +82,7 @@
 
 <!-- 精品旅游路线 -->
 <section class="section">
-    <h2 class="section-title">精品旅游路线</h2>
+    <h2 class="section-title" style="text-align: center;">精品旅游路线</h2>
     <div class="route-cards">
         <a href="{{ url_for('routes') }}" class="route-card featured-route">
             <div class="route-card-left">
@@ -95,19 +95,19 @@
                      alt="飞云楼">
             </div>
         </a>
-        <a href="{{ url_for('routes') }}" class="route-card">
+        <a href="{{ url_for('route_detail', route_name='nanlou-beita') }}" class="route-card">
             <div class="route-card-content">
                 <h3>南楼北塔</h3>
                 <p>飞云楼、秋风楼与应县木塔</p>
             </div>
         </a>
-        <a href="{{ url_for('routes') }}" class="route-card">
+        <a href="{{ url_for('route_detail', route_name='huanghe') }}" class="route-card">
             <div class="route-card-content">
                 <h3>黄河之汤</h3>
                 <p>黄河沿岸旅游路线</p>
             </div>
         </a>
-        <a href="{{ url_for('routes') }}" class="route-card">
+        <a href="{{ url_for('route_detail', route_name='kuibu-qianli') }}" class="route-card">
             <div class="route-card-content">
                 <h3>跬步千里</h3>
                 <p>精品研学路线</p>
@@ -115,39 +115,39 @@
         </a>
     </div>
     <div class="route-mini-cards">
-        <div class="mini-card">
+        <a href="{{ url_for('routes') }}" class="mini-card">
             <h4>秋日赏银杏路线</h4>
             <p>5个建筑 · 2.7公里</p>
-        </div>
-        <div class="mini-card">
+        </a>
+        <a href="{{ url_for('routes') }}" class="mini-card">
             <h4>夏日纳凉路线</h4>
             <p>12个建筑 · 2.9公里</p>
-        </div>
+        </a>
     </div>
-    <p class="more-link">收起更多 ∧</p>
+    <p class="more-link" style="text-align: center;">收起更多 ∧</p>
 </section>
 
 <!-- 体验推荐 -->
 <section class="section">
-    <h2 class="section-title">体验推荐</h2>
+    <h2 class="section-title" style="text-align: center;">体验推荐</h2>
     <div class="experience-cards">
         <a href="{{ url_for('viewer3d') }}" class="exp-card" style="text-decoration: none; background: linear-gradient(135deg, #d4a574 0%, #c19a6b 100%); color: white;">
             <h3 style="color: white;">榫卯3D查看器</h3>
             <p style="color: rgba(255,255,255,0.9);">360度旋转查看榫卯结构</p>
         </a>
-        <a href="{{ url_for('culture') }}" class="exp-card" style="text-decoration: none;">
+        <a href="{{ url_for('experience', exp_type='craft') }}" class="exp-card" style="text-decoration: none;">
             <h3>榫卯技艺</h3>
             <p>探索千年匠心的故事</p>
         </a>
-        <a href="{{ url_for('routes') }}" class="exp-card" style="text-decoration: none;">
+        <a href="{{ url_for('experience', exp_type='couple') }}" class="exp-card" style="text-decoration: none;">
             <h3>双人成行</h3>
             <p>感受匠心与有你的邂逅</p>
         </a>
-        <a href="{{ url_for('routes') }}" class="exp-card" style="text-decoration: none;">
+        <a href="{{ url_for('experience', exp_type='weekend') }}" class="exp-card" style="text-decoration: none;">
             <h3>周末小游</h3>
             <p>让心灵自由呼吸</p>
         </a>
-        <a href="{{ url_for('routes') }}" class="exp-card" style="text-decoration: none;">
+        <a href="{{ url_for('experience', exp_type='family') }}" class="exp-card" style="text-decoration: none;">
             <h3>亲子时光</h3>
             <p>陪孩子走进匠艺时光</p>
         </a>
