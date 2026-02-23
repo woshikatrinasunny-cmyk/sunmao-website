@@ -7,29 +7,40 @@
             <input type="text" placeholder="搜索商品名称" class="search-input">
         </div>
         <div class="shop-filters">
-            <span class="filter-btn active">官方推荐</span>
-            <span class="filter-btn">益智玩具</span>
-            <span class="filter-btn">建筑模型</span>
-            <span class="filter-btn">家居摆件</span>
+            <span class="filter-btn active" data-category="huanghe">黄河区域原创文创</span>
+            <span class="filter-btn" data-category="official">官方推荐</span>
+            <span class="filter-btn" data-category="toy">益智玩具</span>
+            <span class="filter-btn" data-category="model">建筑模型</span>
+            <span class="filter-btn" data-category="decor">家居摆件</span>
         </div>
     </div>
 
     <div class="product-list">
         <!-- 黄河区域原创文创 - 秋风楼日历 -->
-        <div class="product-item featured-item" onclick="showProductDetail(event, 'qfl-calendar')">
-            <div class="product-badge">黄河区域原创</div>
-            <div class="product-img-gallery">
-                <div class="gallery-main-img">
-                    <img id="qfl-img" src="{{ url_for('static', filename='images/秋风楼日历3.jpg') }}" 
+        <div class="product-item featured-product" data-category="huanghe">
+            <div class="product-badge">原创设计</div>
+            <div class="product-gallery">
+                <div class="gallery-main">
+                    <img id="qfl-main" src="{{ url_for('static', filename='images/秋风楼日历3.jpg') }}" 
                          onerror="this.src='{{ url_for('static', filename='images/placeholder.svg') }}'" 
                          alt="秋风楼日历">
                 </div>
-                <div class="gallery-dots">
-                    <span class="dot" onclick="changeProductImage(event, 'qfl-img', '{{ url_for('static', filename='images/秋风楼日历3.jpg') }}')"></span>
-                    <span class="dot" onclick="changeProductImage(event, 'qfl-img', '{{ url_for('static', filename='images/秋风楼日历4.jpg') }}')"></span>
-                    <span class="dot" onclick="changeProductImage(event, 'qfl-img', '{{ url_for('static', filename='images/秋风楼日历1.png') }}')"></span>
-                    <span class="dot" onclick="changeProductImage(event, 'qfl-img', '{{ url_for('static', filename='images/秋风楼日历2.png') }}')"></span>
-                    <span class="dot" onclick="changeProductImage(event, 'qfl-img', '{{ url_for('static', filename='images/秋风楼日历5.png') }}')"></span>
+                <div class="gallery-thumbs">
+                    <img src="{{ url_for('static', filename='images/秋风楼日历3.jpg') }}" 
+                         onclick="changeImage(event, 'qfl-main', this.src)"
+                         class="thumb active">
+                    <img src="{{ url_for('static', filename='images/秋风楼日历4.jpg') }}" 
+                         onclick="changeImage(event, 'qfl-main', this.src)"
+                         class="thumb">
+                    <img src="{{ url_for('static', filename='images/秋风楼日历1.png') }}" 
+                         onclick="changeImage(event, 'qfl-main', this.src)"
+                         class="thumb">
+                    <img src="{{ url_for('static', filename='images/秋风楼日历2.png') }}" 
+                         onclick="changeImage(event, 'qfl-main', this.src)"
+                         class="thumb">
+                    <img src="{{ url_for('static', filename='images/秋风楼日历5.png') }}" 
+                         onclick="changeImage(event, 'qfl-main', this.src)"
+                         class="thumb">
                 </div>
             </div>
             <div class="product-info">
@@ -41,17 +52,21 @@
         </div>
 
         <!-- 黄河区域原创文创 - 飞云楼日历 -->
-        <div class="product-item featured-item" onclick="showProductDetail(event, 'fyl-calendar')">
-            <div class="product-badge">黄河区域原创</div>
-            <div class="product-img-gallery">
-                <div class="gallery-main-img">
-                    <img id="fyl-img" src="{{ url_for('static', filename='images/飞云楼日历1.png') }}" 
+        <div class="product-item featured-product" data-category="huanghe">
+            <div class="product-badge">原创设计</div>
+            <div class="product-gallery">
+                <div class="gallery-main">
+                    <img id="fyl-main" src="{{ url_for('static', filename='images/飞云楼日历1.png') }}" 
                          onerror="this.src='{{ url_for('static', filename='images/placeholder.svg') }}'" 
                          alt="飞云楼日历">
                 </div>
-                <div class="gallery-dots">
-                    <span class="dot" onclick="changeProductImage(event, 'fyl-img', '{{ url_for('static', filename='images/飞云楼日历1.png') }}')"></span>
-                    <span class="dot" onclick="changeProductImage(event, 'fyl-img', '{{ url_for('static', filename='images/飞云楼日历2.png') }}')"></span>
+                <div class="gallery-thumbs">
+                    <img src="{{ url_for('static', filename='images/飞云楼日历1.png') }}" 
+                         onclick="changeImage(event, 'fyl-main', this.src)"
+                         class="thumb active">
+                    <img src="{{ url_for('static', filename='images/飞云楼日历2.png') }}" 
+                         onclick="changeImage(event, 'fyl-main', this.src)"
+                         class="thumb">
                 </div>
             </div>
             <div class="product-info">
@@ -63,12 +78,11 @@
         </div>
 
         <!-- 官方推荐商品 -->
-        <a href="#product1" class="product-item" onclick="showProductDetail(event, 'product1')">
+        <a href="#product1" class="product-item" data-category="official model" onclick="showProductDetail(event, 'product1')">
             <div class="product-img">
                 <img src="{{ url_for('static', filename='images/product1.jpg') }}" 
                      onerror="this.src='{{ url_for('static', filename='images/placeholder.svg') }}'" 
-                     alt="沉香亭榫卯模型"
-                     loading="lazy">
+                     alt="沉香亭榫卯模型">
             </div>
             <div class="product-info">
                 <h3>沉香亭榫卯模型</h3>
@@ -78,12 +92,11 @@
             </div>
         </a>
         
-        <a href="#product2" class="product-item" onclick="showProductDetail(event, 'product2')">
+        <a href="#product2" class="product-item" data-category="official toy" onclick="showProductDetail(event, 'product2')">
             <div class="product-img">
                 <img src="{{ url_for('static', filename='images/product2.jpg') }}" 
                      onerror="this.src='{{ url_for('static', filename='images/placeholder.svg') }}'" 
-                     alt="十二生肖鲁班锁套装"
-                     loading="lazy">
+                     alt="十二生肖鲁班锁套装">
             </div>
             <div class="product-info">
                 <h3>十二生肖鲁班锁套装</h3>
@@ -93,12 +106,11 @@
             </div>
         </a>
         
-        <a href="#product3" class="product-item" onclick="showProductDetail(event, 'product3')">
+        <a href="#product3" class="product-item" data-category="official model" onclick="showProductDetail(event, 'product3')">
             <div class="product-img">
                 <img src="{{ url_for('static', filename='images/product3.jpg') }}" 
                      onerror="this.src='{{ url_for('static', filename='images/placeholder.svg') }}'" 
-                     alt="黄鹤楼榫卯模型"
-                     loading="lazy">
+                     alt="黄鹤楼榫卯模型">
             </div>
             <div class="product-info">
                 <h3>黄鹤楼榫卯模型</h3>
@@ -108,12 +120,11 @@
             </div>
         </a>
         
-        <a href="#product4" class="product-item" onclick="showProductDetail(event, 'product4')">
+        <a href="#product4" class="product-item" data-category="official toy" onclick="showProductDetail(event, 'product4')">
             <div class="product-img">
                 <img src="{{ url_for('static', filename='images/product4.jpg') }}" 
                      onerror="this.src='{{ url_for('static', filename='images/placeholder.svg') }}'" 
-                     alt="经典榉木鲁班锁"
-                     loading="lazy">
+                     alt="经典榉木鲁班锁">
             </div>
             <div class="product-info">
                 <h3>经典榉木鲁班锁</h3>
@@ -123,11 +134,10 @@
             </div>
         </a>
         
-        <a href="#product5" class="product-item" onclick="showProductDetail(event, 'product5')">
+        <a href="#product5" class="product-item" data-category="official model" onclick="showProductDetail(event, 'product5')">
             <div class="product-img">
                 <img src="{{ url_for('static', filename='images/placeholder.svg') }}" 
-                     alt="应县木塔精密模型"
-                     loading="lazy">
+                     alt="应县木塔精密模型">
                 <div class="placeholder-text">应县木塔模型</div>
             </div>
             <div class="product-info">
@@ -138,11 +148,10 @@
             </div>
         </a>
         
-        <a href="#product6" class="product-item" onclick="showProductDetail(event, 'product6')">
+        <a href="#product6" class="product-item" data-category="official model" onclick="showProductDetail(event, 'product6')">
             <div class="product-img">
                 <img src="{{ url_for('static', filename='images/placeholder.svg') }}" 
-                     alt="飞云楼榫卯模型"
-                     loading="lazy">
+                     alt="飞云楼榫卯模型">
                 <div class="placeholder-text">飞云楼模型</div>
             </div>
             <div class="product-info">
@@ -153,11 +162,10 @@
             </div>
         </a>
         
-        <a href="#product7" class="product-item" onclick="showProductDetail(event, 'product7')">
+        <a href="#product7" class="product-item" data-category="official decor" onclick="showProductDetail(event, 'product7')">
             <div class="product-img">
                 <img src="{{ url_for('static', filename='images/placeholder.svg') }}" 
-                     alt="榫卯结构书签套装"
-                     loading="lazy">
+                     alt="榫卯结构书签套装">
                 <div class="placeholder-text">榫卯书签</div>
             </div>
             <div class="product-info">
@@ -168,11 +176,10 @@
             </div>
         </a>
         
-        <a href="#product8" class="product-item" onclick="showProductDetail(event, 'product8')">
+        <a href="#product8" class="product-item" data-category="official toy" onclick="showProductDetail(event, 'product8')">
             <div class="product-img">
                 <img src="{{ url_for('static', filename='images/placeholder.svg') }}" 
-                     alt="儿童榫卯启蒙积木"
-                     loading="lazy">
+                     alt="儿童榫卯启蒙积木">
                 <div class="placeholder-text">儿童积木</div>
             </div>
             <div class="product-info">
@@ -186,15 +193,15 @@
 </section>
 
 <script>
-function changeProductImage(event, imgId, newSrc) {
-    event.stopPropagation(); // 防止触发商品详情
-    const img = document.getElementById(imgId);
-    img.src = newSrc;
+function changeImage(event, mainId, newSrc) {
+    event.stopPropagation();
+    const mainImg = document.getElementById(mainId);
+    mainImg.src = newSrc;
     
-    // 更新圆点激活状态
-    const gallery = img.closest('.product-img-gallery');
-    gallery.querySelectorAll('.dot').forEach((dot, index) => {
-        dot.classList.remove('active');
+    // 更新缩略图激活状态
+    const gallery = mainImg.closest('.product-gallery');
+    gallery.querySelectorAll('.thumb').forEach(thumb => {
+        thumb.classList.remove('active');
     });
     event.currentTarget.classList.add('active');
 }
@@ -211,6 +218,32 @@ function showProductDetail(event, productId) {
     const productName = event.currentTarget.querySelector('h3').textContent;
     alert(`商品详情：${productName}\n\n点击确定查看更多信息（功能开发中）`);
 }
+
+// 筛选功能
+document.addEventListener('DOMContentLoaded', function() {
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const products = document.querySelectorAll('.product-item');
+    
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+            // 更新按钮状态
+            filterBtns.forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
+            
+            const category = this.dataset.category;
+            
+            // 筛选商品
+            products.forEach(product => {
+                const categories = product.dataset.category;
+                if (categories && categories.includes(category)) {
+                    product.style.display = 'block';
+                } else {
+                    product.style.display = 'none';
+                }
+            });
+        });
+    });
+});
 </script>
 
 <style>
@@ -224,58 +257,6 @@ function showProductDetail(event, productId) {
 .product-img {
     position: relative;
     overflow: hidden;
-}
-
-/* 多图展示样式 */
-.product-img-gallery {
-    position: relative;
-    overflow: hidden;
-}
-
-.gallery-main-img {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: white;
-}
-
-.gallery-main-img img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.gallery-dots {
-    position: absolute;
-    bottom: 8px;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    gap: 6px;
-    z-index: 10;
-}
-
-.dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.6);
-    cursor: pointer;
-    transition: all 0.3s;
-    border: 1px solid rgba(0, 0, 0, 0.2);
-}
-
-.dot:hover {
-    background: rgba(255, 255, 255, 0.9);
-    transform: scale(1.2);
-}
-
-.dot.active,
-.dot:first-child {
-    background: white;
-    box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
 }
 
 .placeholder-text {
@@ -299,7 +280,6 @@ function showProductDetail(event, productId) {
     text-decoration: none;
     color: inherit;
     display: block;
-    position: relative;
 }
 
 .product-item:hover {
@@ -312,9 +292,9 @@ function showProductDetail(event, productId) {
     box-shadow: 0 8px 25px rgba(184, 160, 126, 0.3);
 }
 
-/* 原创商品徽章 */
-.featured-item {
-    border: 2px solid var(--accent);
+/* 原创商品样式 */
+.featured-product {
+    position: relative;
 }
 
 .product-badge {
@@ -329,6 +309,66 @@ function showProductDetail(event, productId) {
     font-weight: 600;
     z-index: 10;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* 多图展示样式 */
+.product-gallery {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    background: var(--bg-cream);
+    padding: 10px;
+}
+
+.gallery-main {
+    width: 100%;
+    height: 200px;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 10px;
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.gallery-main img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    transition: transform 0.3s;
+}
+
+.gallery-main:hover img {
+    transform: scale(1.05);
+}
+
+.gallery-thumbs {
+    display: flex;
+    gap: 6px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.thumb {
+    width: 45px;
+    height: 45px;
+    border-radius: 6px;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: all 0.3s;
+    object-fit: cover;
+}
+
+.thumb:hover {
+    border-color: var(--accent);
+    transform: scale(1.1);
+}
+
+.thumb.active {
+    border-color: var(--accent-dark);
+    box-shadow: 0 2px 8px rgba(184, 160, 126, 0.4);
 }
 </style>
 {% endblock %}
