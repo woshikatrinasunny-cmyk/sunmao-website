@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, send_from_directory
 
 app = Flask(__name__)
 
@@ -33,6 +33,11 @@ def experience(exp_type):
 @app.route('/route_detail/<route_name>')
 def route_detail(route_name):
     return render_template('route_detail.html', route_name=route_name)
+
+# 微信验证文件路由
+@app.route('/7629f2f2f84ace5a3c1cc31e74775e29.txt')
+def wechat_verify():
+    return send_from_directory('static', '7629f2f2f84ace5a3c1cc31e74775e29.txt')
 
 if __name__ == '__main__':
     # 开发环境：使用localhost（WebXR支持）
