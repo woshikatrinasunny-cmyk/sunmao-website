@@ -178,19 +178,6 @@
             </div>
         </a>
         
-        <a href="#product7" class="product-item" data-category="official decor" onclick="showProductDetail(event, 'product7')">
-            <div class="product-img">
-                <img src="{{ url_for('static', filename='images/placeholder.svg') }}" 
-                     alt="榫卯结构书签套装">
-                <div class="placeholder-text">榫卯书签</div>
-            </div>
-            <div class="product-info">
-                <h3>榫卯结构书签套装</h3>
-                <p class="product-desc">10款经典榫卯结构书签，黄铜材质，激光雕刻</p>
-                <p class="product-sales">月销量 420+ · 好评率 99%</p>
-                <p class="product-price">¥ <span>39</span>.00起</p>
-            </div>
-        </a>
         
         <!-- 鲁班斗拱凳 -->
         <div class="product-item" data-category="official decor" onclick="showProductDetail(event, 'luban-dougong')">
@@ -204,7 +191,7 @@
                 <h3>鲁班斗拱凳</h3>
                 <p class="product-desc">传统斗拱结构设计，纯榫卯工艺，实用与艺术的完美结合</p>
                 <p class="product-sales">手工制作 · 限量发售</p>
-                <p class="product-price">¥ <span>680</span>.00</p>
+                <p class="product-price">¥ <span>858</span>.00</p>
             </div>
         </div>
         
@@ -250,7 +237,7 @@
                 <h3>镂空雕刻鲁班凳</h3>
                 <p class="product-desc">一块木板镂空雕刻而成，无钉无胶，展现榫卯工艺的极致魅力</p>
                 <p class="product-sales">大师手工 · 收藏级</p>
-                <p class="product-price">¥ <span>1280</span>.00</p>
+                <p class="product-price">¥ <span>649</span>.00</p>
             </div>
         </div>
         
@@ -403,30 +390,27 @@ document.addEventListener('DOMContentLoaded', function() {
     height: 100%;
     display: flex;
     flex-direction: column;
-    background: linear-gradient(135deg, #faf7f2 0%, #f5f0e8 100%);
-    padding: 12px;
-    border-radius: 8px;
+    background: white;
+    padding: 0;
 }
 
 .gallery-main {
     width: 100%;
-    height: 200px;
-    border-radius: 8px;
+    height: 100%;
+    min-height: 180px;
     overflow: hidden;
-    margin-bottom: 10px;
     background: white;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    padding: 8px;
 }
 
 .gallery-main img {
     width: 100%;
     height: 100%;
-    object-fit: contain;
+    object-fit: cover;
     transition: transform 0.3s;
-    padding: 5px;
 }
 
 .gallery-main:hover img {
@@ -435,33 +419,32 @@ document.addEventListener('DOMContentLoaded', function() {
 
 .gallery-thumbs {
     display: flex;
-    gap: 6px;
+    gap: 4px;
     justify-content: center;
+    padding: 8px;
+    background: var(--bg-cream);
     flex-wrap: wrap;
 }
 
 .thumb {
-    width: 48px;
-    height: 48px;
-    border-radius: 6px;
+    width: 42px;
+    height: 42px;
+    border-radius: 4px;
     cursor: pointer;
     border: 2px solid transparent;
     transition: all 0.3s;
     object-fit: cover;
     background: white;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 .thumb:hover {
     border-color: var(--accent);
-    transform: scale(1.1);
-    box-shadow: 0 2px 6px rgba(184, 160, 126, 0.3);
+    transform: scale(1.08);
 }
 
 .thumb.active {
     border-color: var(--accent-dark);
-    box-shadow: 0 2px 8px rgba(184, 160, 126, 0.5);
-    transform: scale(1.05);
+    box-shadow: 0 0 0 1px var(--accent-dark);
 }
 </style>
 {% endblock %}
