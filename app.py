@@ -37,7 +37,7 @@ def route_detail(route_name):
 # 微信验证文件路由
 @app.route('/7629f2f2f84ace5a3c1cc31e74775e29.txt')
 def wechat_verify():
-    return send_from_directory('static', '7629f2f2f84ace5a3c1cc31e74775e29.txt')
+    return '31938865e7701e234893284b2859d1dc23e9aeb', 200, {'Content-Type': 'text/plain'}
 
 if __name__ == '__main__':
     # 开发环境：使用localhost（WebXR支持）
