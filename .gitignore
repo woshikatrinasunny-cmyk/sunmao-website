@@ -41,3 +41,9 @@ Thumbs.db
 # Environment
 .env
 .env.local
+
+# Root video files (copies exist in static/videos/)
+/3月19日.mp4
+/鲁班凳1.mp4
+/鲁班凳2.mp4
+/鲁班案.mp4

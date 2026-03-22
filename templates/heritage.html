@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="heritage-page">
+    <!-- 页面头部 -->
+    <div class="heritage-header">
+        <div class="heritage-header-inner">
+            <h1 class="heritage-main-title">非遗榫卯传承人</h1>
+            <p class="heritage-name">许水山</p>
+            <p class="heritage-desc">匠心传承 · 榫卯技艺 · 国家级非物质文化遗产</p>
+        </div>
+    </div>
+
+    <!-- 第一部分：许水山先生与榫卯的故事 -->
+    <div class="heritage-section">
+        <div class="heritage-section-header">
+            <span class="heritage-section-num">壹</span>
+            <div>
+                <h2 class="heritage-section-title">许水山先生与榫卯的故事</h2>
+                <p class="heritage-section-sub">一位匠人，一生坚守，让古老的榫卯技艺在新时代焕发生机</p>
+            </div>
+        </div>
+        <div class="heritage-video-wrap">
+            <video controls preload="metadata" poster="">
+                <source src="{{ url_for('static', filename='videos/3月19日.mp4') }}" type="video/mp4">
+                您的浏览器不支持视频播放
+            </video>
+        </div>
+    </div>
+
+    <!-- 第二部分：鲁班凳和鲁班案 -->
+    <div class="heritage-section">
+        <div class="heritage-section-header">
+            <span class="heritage-section-num">贰</span>
+            <div>
+                <h2 class="heritage-section-title">鲁班凳和鲁班案</h2>
+                <p class="heritage-section-sub">传统木工技艺的巅峰之作，不用一钉一铆，全凭榫卯结构</p>
+            </div>
+        </div>
+        <div class="heritage-video-grid">
+            <div class="heritage-video-card">
+                <div class="heritage-video-wrap">
+                    <video controls preload="metadata">
+                        <source src="{{ url_for('static', filename='videos/鲁班凳1.mp4') }}" type="video/mp4">
+                    </video>
+                </div>
+                <p class="heritage-video-label">鲁班凳 · 其一</p>
+            </div>
+            <div class="heritage-video-card">
+                <div class="heritage-video-wrap">
+                    <video controls preload="metadata">
+                        <source src="{{ url_for('static', filename='videos/鲁班凳2.mp4') }}" type="video/mp4">
+                    </video>
+                </div>
+                <p class="heritage-video-label">鲁班凳 · 其二</p>
+            </div>
+            <div class="heritage-video-card">
+                <div class="heritage-video-wrap">
+                    <video controls preload="metadata">
+                        <source src="{{ url_for('static', filename='videos/鲁班案.mp4') }}" type="video/mp4">
+                    </video>
+                </div>
+                <p class="heritage-video-label">鲁班案</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

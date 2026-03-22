@@ -18,6 +18,10 @@ def culture():
 def shop():
     return render_template('shop.html')
 
+@app.route('/heritage')
+def heritage():
+    return render_template('heritage.html')
+
 @app.route('/profile')
 def profile():
     return render_template('profile.html')
